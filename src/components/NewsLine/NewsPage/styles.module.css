@@ -1,0 +1,102 @@
+.root {
+  margin-left: 30px;
+}
+
+.root p,
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--color);
+}
+
+.root li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.linkAndTitle {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.backArrow {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  color: var(--color);
+}
+
+.backArrow:hover {
+  color: var(--color-link);
+}
+
+.buttonUp{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--background-color);
+  background-color: var(--background-color);
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.buttonUp:hover {
+  transition: 0.5s;
+  color: var(--color-link);
+}
+
+.buttonUp svg:hover {
+  transition: 0.5s;
+  color: var(--color-link);
+  fill: var(--color-link) !important;
+}
+
+
+.buttonUp a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--background-color);
+  text-decoration: none;
+}
+
+.buttonUp a:hover {
+  color: var(--color-link) !important;
+}
+
+.svgButton {
+  fill: var(--color);
+  margin-right: 10px;
+}
+
+.isOpen {
+  display: flex;
+  align-items: center;
+  margin: 15px 0 15px 0;
+}
+
+.isOpen p, svg {
+  margin: 0;
+  padding: 0;
+  margin-right: 10px;
+  color: var(--color);
+  fill: var(--color);
+}
+
+.textBoard {
+  max-width: 900px;
+}
+
+.image {
+  max-width: 200px;
+}

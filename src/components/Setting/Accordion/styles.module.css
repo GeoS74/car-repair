@@ -1,0 +1,53 @@
+.root>div {
+  background-color: var(--background-color) !important;
+  border-color: var(--color) !important;
+}
+
+.root h2>span {
+  background-color: var(--background-color) !important;
+}
+
+.root>div,
+.root h2>span {
+  color: var(--color) !important;
+}
+
+.root h2>span:hover {
+  cursor: pointer;
+}
+
+/* стрелка выпадающего листа */
+.root h2>span::after {
+  background-image: var(--bs-accordion-btn-icon-custom) !important;
+  transition: var(--bs-accordion-btn-icon-custom-transition);
+}
+
+.root input[type=checkbox]{
+  margin-right: 20px;
+}
+
+.root label{
+  cursor: pointer;
+}
+
+.root .actionsList{
+  margin-left: 50px;
+}
+.root .actionsList p:first-child{
+  font-size: small;
+}
+.root .actionsList p:first-child:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.root .task{
+  padding: 10px;
+}
+.root .task>span{
+  margin-left: 10px;
+}
+.root .task>span:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

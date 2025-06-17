@@ -1,0 +1,26 @@
+.root{
+  display: flex;
+  flex-flow: row nowrap;
+  /* align-items: center; */
+}
+
+.root>div{
+  flex: 2;
+}
+
+.root>div:nth-child(2) {
+  text-align: right;
+}
+.root>div:nth-child(2) small {
+  margin-right: 25px;
+}
+.svg {
+  margin-right: 15px;
+  fill: var(--color);
+  opacity: 0.6;
+}
+
+.svg:hover{
+  cursor: pointer;
+  opacity: 1;
+}

@@ -1,0 +1,181 @@
+version: '1.0'
+services:
+  bridge_app:
+    image: "geos74/bridge:0.0.3"
+    ports:
+      - "3100:3500"
+    environment:
+      - SERVER_PORT=3500
+      - DB_USER=bridge
+      - DB_HOST=db_bridge
+      - DB_NAME=bridge
+      - DB_PASS=admin
+      - NODE_ENV=dev
+      - JWT_CHECK=true
+      - JWT_SECRET_KEY=any_secret
+      - ACTUAL_TTL=30 day
+    volumes:
+      - init-db-bridge:/bridge/libs
+      - card-photo-bridge:/bridge/files/photo
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+    restart: on-failure
+  db_bridge:
+    image: "postgres"
+    volumes:
+      - init-db-bridge:/docker-entrypoint-initdb.d
+      - db-bridge:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=bridge
+      - POSTGRES_DB=bridge
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+    restart: on-failure
+  mauth_app:
+    image: "geos74/mauth:1.0.0"
+    ports:
+      - "3001:3001"
+    environment:
+      - SERVER_PORT=3001
+      - NODE_ENV=dev
+      - SERVER_DOMAIN=localhost:3000
+      - DB_USER=mauth
+      - DB_HOST=db_mauth
+      - DB_NAME=mauth
+      - DB_PASS=admin
+      - MAIL_USER=carlos.mclaughlin74@ethereal.email
+      - MAIL_PASS=HHFkMdCtXwYpy7Ej7a
+      - MAIL_HOST=smtp.ethereal.email
+      - MAIL_PORT=587
+      - MAIL_SECURE=false
+      - IGNORE_TLS=false
+      - JWT_TTL=1800
+      - JWT_SECRET_KEY=any_secret
+      - VERIFICATION_TTL=10 minute
+      - VERIFICATION_IGNORE=true
+      - SESSION_TTL=30 day
+      - TPL_CONFIRM_PATH=/auth/confirm # or use route mauth app: /api/mauth/confirm
+      # - TPL_RECOVERY_PATH=/api/mauth/forgot
+    volumes:
+      - init-db-mauth:/mauth/libs
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+    restart: on-failure
+  db_mauth:
+    image: "postgres"
+    volumes:
+      - init-db-mauth:/docker-entrypoint-initdb.d
+      - db-mauth:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=mauth
+      - POSTGRES_DB=mauth
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+    restart: on-failure
+  informator:
+    image: "geos74/informator:0.0.2"
+    ports:
+      - "3200:3200"
+    environment:
+      - SERVER_PORT=3200
+      - NODE_ENV=dev
+      - DB_USER=root
+      - DB_PASS=passwordXXX
+      - DB_HOST=db_info
+      - DB_PORT=27017
+      - DB_NAME=admin
+      - JWT_CHECK=true
+      - JWT_SECRET_KEY=any_secret
+    volumes:
+      - user-avatar-informator:/informator/files/photo
+      - init-db-informator:/informator/libs/db.init
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+    restart: on-failure
+  db_info:
+    image: "mongo"
+    volumes:
+      - db-informator:/data/db
+      - init-db-informator:/docker-entrypoint-initdb.d
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=passwordXXX
+      - MONGO_INITDB_DATABASE=admin
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+    restart: on-failure
+  # db_mnote:
+  #   image: "mongo"
+  #   volumes:
+  #     - db-mnote:/data/db
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=root
+  #     - MONGO_INITDB_ROOT_PASSWORD=passwordXXX
+  #     - MONGO_INITDB_DATABASE=admin
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 500M
+  #   restart: on-failure
+  mnote_app:
+    image: "geos74/mnote:0.0.1"
+    ports:
+      - "3300:3300"
+    environment:
+      - SERVER_PORT=3300
+      - NODE_ENV=dev
+      - DB_USER=root
+      - DB_PASS=passwordXXX
+      - DB_HOST=db_info
+      - DB_PORT=27017
+      - DB_NAME=admin
+      - JWT_CHECK=true
+      - JWT_SECRET_KEY=any_secret
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+    volumes:
+      - files-mnote:/mnote/files/images
+    restart: on-failure
+  # react:
+  #   image: "geos74/signal:0.0.1"
+  #   # build: .
+  #   ports:
+  #     - "3000:80"
+  #     - "443:443"
+  #   environment:
+  #     - HOST_BRIDGE=bridge_app
+  #     - PORT_BRIDGE=3500
+  #     - HOST_MAUTH=mauth_app
+  #     - PORT_MAUTH=3001
+  #     - HOST_INFORMATOR=informator
+  #     - PORT_INFORMATOR=3200
+  #     - HOST_MNOTE=mnote_app
+  #     - PORT_MNOTE=3300
+  #   restart: on-failure
+volumes:
+  init-db-bridge:
+  db-bridge:
+  card-photo-bridge:
+  init-db-mauth:
+  db-mauth:
+  db-informator:
+  user-avatar-informator:
+  init-db-informator:
+  db-mnote:
+  files-mnote:

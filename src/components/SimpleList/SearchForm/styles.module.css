@@ -1,0 +1,6 @@
+.root {
+  max-width: 400px;
+}
+.root input {
+  border: solid 2px var(--color)
+}

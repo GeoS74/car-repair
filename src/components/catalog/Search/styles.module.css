@@ -1,0 +1,5 @@
+.root>h3 {
+  color: var(--color);
+  display: flex;
+  justify-content: center;
+}

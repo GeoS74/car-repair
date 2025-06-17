@@ -1,0 +1,43 @@
+.root {
+    padding: 0;
+    margin: 20px 20px 20px 0;
+    
+}
+
+.root[data-calendarTheme="dark"] {    
+    --color: #ffffff;
+    --background-color: #1a1a1a;
+    --color-grey: #8c8c8c;
+  }
+  
+.root[data-calendarTheme="light"] {
+    --color: #1a1a1a;
+    --background-color: #ffffff;
+    --color-grey: #8c8c8c;
+}
+
+.root p {
+    color: var(--color);
+}
+
+.icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 170px;
+    cursor: pointer;
+}
+
+.date {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color);
+}
+
+.svg {
+    height: 40px;
+    width: 40px;
+    fill: var(--color);
+}

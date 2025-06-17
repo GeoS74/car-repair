@@ -1,0 +1,23 @@
+.root {
+  margin: 20px 20px 20px 0;
+}
+
+.root fieldset {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: center;
+}
+
+.root fieldset>input {
+  margin-right: 10px;
+}
+
+.root fieldset>input[type=search] {
+  flex: 0.7;
+  border: solid 2px var(--color)
+}
+
+.root fieldset>input[type=submit]{
+  flex: 0.1;
+}

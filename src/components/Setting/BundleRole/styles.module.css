@@ -1,0 +1,9 @@
+.root h3,
+.root h5 {
+  color: var(--color);
+}
+
+.root>div {
+  padding:20px 30px;
+  border: 2px solid var(--color);
+}

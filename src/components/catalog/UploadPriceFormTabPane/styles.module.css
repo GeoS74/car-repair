@@ -1,0 +1,19 @@
+.root span,
+.root span:hover{
+  color: var(--color);
+  cursor: pointer
+}
+
+.root h5 {
+  color: var(--color);
+}
+
+.root select,
+.root input {
+  border: solid 1px var(--color) !important;
+}
+
+.labelCheckbox{
+  margin-left: 20px;
+  cursor: pointer;
+}

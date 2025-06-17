@@ -1,0 +1,11 @@
+.root{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.root>div{
+  flex:1 200px;
+  margin-right: 20px;
+}
+
+

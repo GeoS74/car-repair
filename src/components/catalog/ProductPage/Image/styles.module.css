@@ -1,0 +1,18 @@
+.root {
+}
+
+.root img {
+  width: 80%;
+}
+
+.svg {
+  width: 100px;
+  fill: var(--color);
+  opacity: 0.8;
+  margin: 15px;
+}
+
+.svg:hover{
+  cursor: pointer;
+  opacity: 1;
+}

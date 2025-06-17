@@ -1,0 +1,9 @@
+.root>fieldset {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.root select {
+  width:auto;
+  margin-right: 15px;
+}

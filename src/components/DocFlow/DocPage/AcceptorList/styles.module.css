@@ -1,0 +1,27 @@
+.root{
+  margin: 35px 0 35px 0;
+  max-width: 900px;
+}
+
+.root>div{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.root>div>div{
+  flex: 3;
+}
+
+.sign {
+  color: rgb(45, 115, 69);
+  background-color: #dbf2e3;
+  padding: 15px;
+  width: auto;
+  text-align: center;
+}
+
+.root>div>div:nth-child(3){
+  text-align: right;
+}

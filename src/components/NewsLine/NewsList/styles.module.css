@@ -1,0 +1,16 @@
+.root {
+  margin-left: 10px;
+}
+
+.root>h3 {
+  color: var(--color);
+}
+
+.root>a {
+  margin: 10px 0 25px 0;
+}
+
+.button {
+  border-radius: 10px;
+  border-width: 5px !important;
+}

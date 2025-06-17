@@ -1,0 +1,24 @@
+.root fieldset {
+  display: flex;
+  flex-flow: row nowrap;
+  max-width: 600px;
+}
+
+.root fieldset>input,
+.root fieldset>span {
+  margin-right: 10px;
+}
+
+.root fieldset>input[type=text] {
+  flex: 4;
+  border: solid 2px var(--color);
+}
+
+.root fieldset>input[type=submit],
+.root fieldset>span {
+  flex: 1;
+}
+
+.root strong{
+  color:orange
+}

@@ -1,0 +1,9 @@
+.root>h3,
+.root>ul {
+  color: var(--color);
+}
+
+.root li {
+  white-space: nowrap;
+  padding: 10px;
+}

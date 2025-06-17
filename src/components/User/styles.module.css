@@ -1,0 +1,8 @@
+.root {
+  margin: 20px;
+}
+
+.root>h1,
+.root p {
+  color: var(--color);
+}

@@ -1,0 +1,12 @@
+.root img,
+.root svg {
+  height: 150px;
+  border-radius: 150px;
+  overflow: hidden;
+  color: var(--color) !important;
+  fill: var(--color) !important;
+}
+.root img:hover,
+.root svg:hover{
+  cursor: pointer
+}

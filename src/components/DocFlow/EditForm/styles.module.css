@@ -1,0 +1,23 @@
+.root {
+  max-width: 1000px;
+  background-color: var(--background-color);
+  border: 1px solid var(--color);
+  padding: 15px 25px;
+  margin-bottom:100px;
+}
+
+.root h3,
+.root h4,
+.root li,
+.root legend {
+  color: var(--color);
+}
+
+.root input[type=submit] {
+  margin-right: 10px;
+}
+
+.formUser {
+  display: flex;
+  flex-direction: row;
+}

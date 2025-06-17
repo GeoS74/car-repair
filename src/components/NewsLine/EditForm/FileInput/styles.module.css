@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px var(--color);
+  max-width: 350px;
+  opacity: 0.7;
+}
+.root:hover{
+  cursor: pointer;
+  opacity: 1;
+}
+.root>p img{
+  width: 50px
+}
+.root p{
+  color: var(--color)
+}

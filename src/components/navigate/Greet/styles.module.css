@@ -1,0 +1,11 @@
+.root {
+  z-index: 100500;
+  margin: 24px 20px 0 0;
+  text-align: right;
+}
+.root a{
+  white-space: nowrap;
+}
+.root a:hover{
+  color: var(--color);
+}

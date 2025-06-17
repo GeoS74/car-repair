@@ -1,0 +1,18 @@
+.root {
+  margin: 20px;
+}
+
+.root a,
+.root p,
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--color);
+}
+
+.root a:hover {
+  text-decoration: none;
+}

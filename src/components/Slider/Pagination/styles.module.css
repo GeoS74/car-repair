@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.root>input{
+  margin: 5px
+}
+
+.root>input:hover{
+  cursor: pointer;
+}

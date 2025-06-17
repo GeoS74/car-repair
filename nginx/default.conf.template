@@ -1,0 +1,27 @@
+client_max_body_size 10m;
+
+server {
+  listen 80;
+  server_name localhost;
+
+  location / {
+    root   /usr/share/nginx/html;
+    try_files $uri /index.html;
+  }
+
+  location /api/bridge/ {
+    proxy_pass http://${HOST_BRIDGE}:${PORT_BRIDGE};
+  }
+
+  location /api/mauth/ {
+    proxy_pass http://${HOST_MAUTH}:${PORT_MAUTH};
+  }
+
+  location /api/informator/ {
+    proxy_pass http://${HOST_INFORMATOR}:${PORT_INFORMATOR};
+  }
+
+  location /api/mnote/ {
+    proxy_pass http://${HOST_MNOTE}:${PORT_MNOTE};
+  }
+}

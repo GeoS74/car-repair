@@ -1,0 +1,10 @@
+.root{
+  margin-bottom: 15px;
+}
+.root>span{
+  margin-left: 10px;
+}
+.root>span:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

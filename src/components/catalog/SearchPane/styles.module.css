@@ -1,0 +1,56 @@
+.root>header,
+.root>div {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.root>div:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.root>header>div,
+.root>div>div {
+  padding: 10px;
+}
+.root>header{
+  cursor: default;
+}
+
+/* title and article */
+.root div p {
+  color: #1a1a1a;
+}
+
+.root div p:nth-child(1) {
+  font-weight: 900;
+  cursor: pointer;
+}
+.root div p:nth-child(1):hover {
+  text-decoration: underline;
+}
+
+.root div p:nth-child(2) {
+  font-size: small;
+}
+
+/* width columns */
+.root>header>div:nth-child(1),
+.root>div>div:nth-child(1) {
+  flex: 4;
+}
+
+.root>header>div:nth-child(2),
+.root>header>div:nth-child(3),
+.root>header>div:nth-child(4),
+.root>header>div:nth-child(5),
+.root>div>div:nth-child(2),
+.root>div>div:nth-child(3),
+.root>div>div:nth-child(4),
+.root>div>div:nth-child(5) {
+  flex: 1;
+}
+
+.root>header>div:nth-child(6),
+.root>div>div:nth-child(6) {
+  flex: 0.5;
+}

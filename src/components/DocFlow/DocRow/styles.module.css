@@ -1,0 +1,30 @@
+.root {
+  padding:20px 30px;
+  border: 1px solid var(--color);
+  background-color: var(--background-color);
+  max-width: 1000px;
+}
+
+.root:hover{
+  box-shadow: 2px 2px 5px 1px grey;
+}
+
+.root p,
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--color)
+}
+
+.root a:hover,
+.root h4:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.root button {
+  margin-right: 10px;
+}

@@ -1,0 +1,83 @@
+.root {
+  max-width: 1000px;
+  background-color: var(--background-color);
+  border: 1px solid var(--color);
+  padding: 15px 25px;
+}
+
+.root p,
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--color);
+}
+
+.root button {
+  margin-right: 10px;
+}
+
+/* 
+
+.root button{
+  margin-right: 15px;
+}
+.root a:hover{
+  color: var(--color) !important;
+}
+
+.linkAndTitle {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: solid 5px;
+  border-radius: 10px;
+  margin: 5px 10px 0 0;
+  padding: 10px 10px 10px 10px;
+  color: var(--color);
+  background-color: var(--background-color);
+  width: 250px;
+  font-size: 18px;
+}
+
+.button div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--color);
+  transition: 0.5s;
+  color: var(--background-color)
+}
+
+.svgButton {
+  fill: var(--color);
+}
+
+.button:hover svg {
+  fill: var(--background-color);
+}
+
+.root li {
+  display: flex;
+}
+
+.root span {
+  color: var(--color);
+  margin-right: 10px;
+} */

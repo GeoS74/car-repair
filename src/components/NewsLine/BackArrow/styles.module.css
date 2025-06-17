@@ -1,0 +1,15 @@
+.root {
+  background-color: var(--backgraund-color) !important;
+}
+
+.rootButton {
+  fill: var(--color);
+  transform: rotate(270deg);
+  margin-right: 10px;
+}
+
+.rootButton:hover {
+  fill: var(--color-link);
+  transform: rotate(270deg);
+  margin-right: 10px;
+}

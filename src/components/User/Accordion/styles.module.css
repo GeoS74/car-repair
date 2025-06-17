@@ -1,0 +1,24 @@
+.root>div {
+  background-color: var(--background-color) !important;
+  border: 1px solid var(--color);
+}
+
+.root h2>span {
+  background-color: var(--background-color) !important;
+}
+
+.root>div,
+.root p,
+.root h2>span {
+  color: var(--color) !important;
+}
+
+.root h2>span:hover {
+  cursor: pointer;
+}
+
+/* стрелка выпадающего листа */
+.root h2>span::after {
+  background-image: var(--bs-accordion-btn-icon-custom) !important;
+  transition: var(--bs-accordion-btn-icon-custom-transition);
+}

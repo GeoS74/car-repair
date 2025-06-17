@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  flex-flow: column wrap;
+  flex: 400px;
+  margin: 10px;
+  padding: 20px;
+  background-color: var(--background-color);
+  border: 1px solid var(--color);
+}
+
+.root:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px 1px grey;
+}
+
+.root h5 {
+  color: var(--color);
+}
+
+.root p {
+  color: var(--color);
+  text-align: right;
+}
+
+.root div {
+  text-align: center;
+}
+
+.svg {
+  fill: var(--color);
+  width: 70px !important;
+}

@@ -1,0 +1,24 @@
+.root {
+  margin-top: 70px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.root>div:nth-child(1) {
+  flex: 2 300px;
+  max-width: 300px; /* ограничить растяжение блока */
+}
+
+.root>div:nth-child(2) {
+  flex: 2 300px;
+  max-width: 800px; /* ограничить растяжение блока */
+}
+
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--color);
+}

@@ -1,0 +1,22 @@
+.root{
+  width: 500px;
+}
+
+.root input {
+  border: solid 1px var(--color);
+}
+
+.dataList {
+  position: absolute;
+  width: 500px;
+  background: var(--color);
+}
+
+.dataList>div {
+  padding: 10px;
+}
+.dataList>div:hover {
+  background: var(--background-color);
+  cursor: pointer;
+}
+

@@ -1,0 +1,20 @@
+.root {
+  border: 1px solid var(--color) !important;
+}
+
+.root div:first-child {
+  border-bottom: 1px solid var(--color);
+}
+
+.root h2 {
+  font-size: 1em;
+  color: var(--color) !important;
+}
+
+.root div{
+  background-color: var(--background-color) !important;
+}
+
+.root input[type=submit] {
+  margin-right: 10px;
+}

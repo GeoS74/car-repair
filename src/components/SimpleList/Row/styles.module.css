@@ -1,0 +1,13 @@
+.li {
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.li>span {
+  margin: 0 10px;
+}
+
+.li>span:hover {
+  cursor: pointer;
+  color: var(--color) !important;
+}

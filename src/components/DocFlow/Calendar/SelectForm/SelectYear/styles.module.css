@@ -1,0 +1,83 @@
+.root {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 3px var(--color) solid;    
+    border-radius: 10px;
+    width: 190px;
+    padding: 5px;
+}
+
+.hederMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.hederMenu>p {
+    margin: 10px;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.arrow {
+    margin: 0;
+    padding: 3px;
+    border: 3px var(--background-color) solid;
+    border-radius: 5px;
+}
+
+.arrow:hover {
+    border: 3px var(--color) solid;
+}
+
+.years {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    padding: 5px;
+}
+
+.year {    
+    display: flex;
+    justify-content: center;
+    margin: 1px;
+    padding: 5px;
+    width: 50px;
+    border: 3px var(--color) solid;
+    border-radius: 10px;
+    color: var(--color);
+    cursor: pointer;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.year:hover {
+    background-color: var(--color-grey);
+    color: var(--background-color);
+}
+
+.currentYear {
+    background-color: var(--color-grey);
+    color: var(--background-color);
+}
+
+.currentYear:hover {
+    background-color: var(--background-color);
+    color: var(--color);
+}
+
+
+

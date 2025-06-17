@@ -1,0 +1,4 @@
+.root>h3,
+.root>ul {
+  color: var(--color);
+}

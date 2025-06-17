@@ -1,0 +1,19 @@
+:root[data-theme="light"] {
+  --color: #1a1a1a;
+  --background-color: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  --color: #ffffff;
+  --background-color: #1a1a1a;
+}
+
+body {
+  background: var(--background-color) !important;
+  background-image: url("./img/ural_m.png") !important;
+  background-position: bottom right !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-size: 50% !important;
+}
+

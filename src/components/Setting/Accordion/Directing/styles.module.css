@@ -1,0 +1,23 @@
+.root{
+  margin-bottom: 15px;
+}
+.root>span{
+  margin-left: 10px;
+}
+.root>span:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--color) !important;
+}
+
+.root .checkboxList{
+  margin-left: 50px;
+}
+.root .checkboxList p:first-child{
+  font-size: small;
+}
+.root .checkboxList p:first-child:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--color) !important;
+}

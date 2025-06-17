@@ -1,0 +1,19 @@
+.root li:hover{
+  color: var(--color) !important;
+  cursor: pointer;
+}
+.root span{
+  margin-left: 10px;
+}
+.root span {
+  color: #d9534f ;
+}
+.root span:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.image {
+  max-width: 200px;
+  max-height: 200px;
+}

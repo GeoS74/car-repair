@@ -1,0 +1,12 @@
+.root span{
+  margin-left: 10px;
+}
+.root p,
+.root span {
+  color: var(--color);
+}
+.root span:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--color) !important;
+}

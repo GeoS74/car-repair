@@ -1,0 +1,25 @@
+.root {
+  margin: 50px 20px 100px 20px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.root>div {
+  width: 80%;
+  column-count: 2;
+  column-width: 400px;
+  column-gap: 2em;
+}
+
+.root a,
+.root p,
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--color);
+}

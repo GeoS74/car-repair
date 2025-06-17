@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.root>label {
+  flex: 2;
+}
+
+.root>span {
+  flex: 2;
+  text-align: right;
+}
+
+.root>span {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.root>span:hover {
+  /* color: white; */
+}

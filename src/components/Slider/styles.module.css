@@ -1,0 +1,29 @@
+/* :root{
+  --slide-width: 550px;
+  --slide-height: 550px;
+} */
+
+.root {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  width: 100%;
+}
+
+.root p,
+.root a,
+.root li,
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  color: var(--color);
+}
+
+.root a:hover {
+  text-decoration: none;
+}

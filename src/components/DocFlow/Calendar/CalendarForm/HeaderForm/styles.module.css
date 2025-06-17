@@ -1,0 +1,49 @@
+.root {
+    border: 3px var(--color) solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 225px;
+}
+
+.arrow {
+    margin: 0;
+    border: 2px var(--color) solid;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: var(--background-color)
+}
+
+.arrow:hover {
+    fill: var(--background-color);
+    border: 2px var(--color-grey) solid;
+    background-color: var(--color);
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2px 5px 2px 5px;
+    padding: 5px;
+    cursor: default;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    border: 3px var(--color) solid;
+    border-radius: 10px;
+    color: var(--color);
+    background-color: var(--background-color);
+}
+
+.form:hover {
+    border: 3px var(--color-grey) solid;
+    border-radius: 10px;
+    color: var(--background-color);
+    background-color: var(--color);
+}
