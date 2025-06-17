@@ -17,20 +17,20 @@ export default function DocRow({ ...doc }: IDoc) {
 
   return <div className={classNames(styles.root, "mt-2")}>
 
-    <OptionalHeader {...doc} />
+    <OptionalHeader {...row} />
 
-    <h4 className="mt-2"><Link to={`/docflow/${doc.id}`} className="nav-link">{doc.title}</Link></h4>
+    <h4 className="mt-2"><Link to={`/docflow/${row.id}`} className="nav-link">{row.title}</Link></h4>
 
-    <Description {...doc} limit={350} />
+    <Description {...row} limit={350} />
 
-    <FileLinkedList files={doc.files} />
+    <FileLinkedList files={row.files} />
 
     <RequiredToSign {...row} signatoryMode={"acceptor"}/>
     <RequiredToSign {...row} signatoryMode={"recipient"}/>
 
     <AcceptButton {...row} signatoryMode={"acceptor"} setDoc={setRow}/>
-    <AcceptButton {...doc} signatoryMode={"recipient"} setDoc={setRow} />
+    <AcceptButton {...row} signatoryMode={"recipient"} setDoc={setRow} />
 
-    <Author {...doc} />
+    <Author {...row} />
   </div>
 }
