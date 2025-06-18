@@ -9,19 +9,25 @@ import { ReactComponent as IconFilter } from "./icons/filter-square.svg";
 import { ReactComponent as IconFire } from "./icons/fire.svg";
 import { ReactComponent as IconFolder } from "./icons/folder.svg";
 import AddDocButton from "./AddDocButton/AddDocButton";
+import AddOrderButton from "./AddOrderButton/AddOrderButton";
 import DepAddInvoice from "./DepAddInvoice/DepAddInvoice";
 import DepInvocesForDirector from "./DepInvocesForDirector/DepInvocesForDirector";
 import styles from "./styles.module.css";
 
 export default function DocBarPanel() {
   session.subscribe('DocBarPanel');
+  
+  // console.log(session.getMe())
 
   return <div>
 
-    {finder(session.getMe()?.roles, 'Создать') ?
+    {/* {// стандартная кнопка
+    finder(session.getMe()?.roles, 'Создать') ?
       <AddDocButton />
       : <></>
-    }
+    } */}
+
+    <AddOrderButton />
 
     <div className={styles.root}>
 

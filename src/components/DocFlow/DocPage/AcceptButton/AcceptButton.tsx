@@ -21,9 +21,13 @@ export default function AcceptButton({ id, acceptor, recipient, signatoryMode, s
   const list = signatoryMode === 'acceptor' ? acceptor : recipient;
 
   const action = signatoryMode === 'acceptor' ? 'Согласовать' : 'Ознакомиться';
+
+  // проверяет может ли пользователь подписывать данный тип документов
+  // при этом пользователб может быть не указан в конкретном документе как подписант
   if(_actionFinder(session.getMe()?.roles[0], directing.id, task.id, action)){
     
-    // обязательна проверка на  false, т.к. если пользователя нет в списке подписантов то find вернёт undefined... прикольно звучит: find вернёт undefined
+    // проверяет подписан документ пользователем или нет
+    // обязательна проверка на false, т.к. если пользователя нет в списке подписантов то find вернёт undefined... прикольно звучит: find вернёт undefined
     if ((list.find(e => e.uid === session.getMe()?.uid))?.accept === false) {
       return <button 
         type="button" 
