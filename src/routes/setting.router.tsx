@@ -43,12 +43,17 @@ export default {
     {
       path: "/setting/edit/actions",
       // element: <><></><></><></><SimpleList typeList="actions" /></>,
-      element: <><></><></><></><FrozenList /></>,
+      element: <><></><></><></><FrozenList title="Список действий"/></>,
       loader: () => fetchWrapper(_getActions).catch(() => redirect('/auth'))
     },
     {
+      path: "/setting/edit/status",
+      element: <><></><></><></><></><FrozenList title="Список статусов"/></>,
+      loader: () => fetchWrapper(_getStatus).catch(() => redirect('/auth'))
+    },
+    {
       path: "/setting/edit/access",
-      element: <><></><></><></><></><AccessSetting /></>,
+      element: <><></><></><></><></><></><AccessSetting /></>,
       loader: () => fetchWrapper([_getRoles, _getDirectings, _getProcesses, _getActions, _getAccessSettings])
         .then(response => {
           if (Array.isArray(response)) {
@@ -59,7 +64,7 @@ export default {
     },
     {
       path: "/setting/edit/bundle/role",
-      element: <><></><></><></><></><></><BundleRole /></>,
+      element: <><></><></><></><></><></><></><BundleRole /></>,
       loader: () => fetchWrapper([_getUsers, _getRoles])
         .then(response => {
           if (Array.isArray(response)) {
@@ -105,6 +110,14 @@ function _getDirectings() {
 
 function _getActions() {
   return fetch(`${serviceHost("informator")}/api/informator/action`, {
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  })
+}
+
+function _getStatus() {
+  return fetch(`${serviceHost("informator")}/api/informator/status`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     }

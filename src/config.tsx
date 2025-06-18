@@ -15,7 +15,7 @@ export default {
   info: {
     back: {
       host: prod ? '' : 'http://localhost',
-      port: prod ? 0 : 3200,
+      port: prod ? 0 : 3201,
     }
   },
   mnote: {
