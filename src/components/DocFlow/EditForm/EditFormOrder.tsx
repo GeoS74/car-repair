@@ -25,11 +25,10 @@ type Props = {
   doc?: IDoc
 }
 
-export default function EditForm({ doc, typeDoc }: Props) {
+export default function EditForm({ typeDoc, doc }: Props) {
 
   const status = useSelector((state: StoreState) => state.status.items);
   console.log(status)
-
 
   const [disabled, setDisabled] = useState(false)
   const [errorMessage, setErrorResponse] = useState<IErrorMessage>();
@@ -67,7 +66,10 @@ export default function EditForm({ doc, typeDoc }: Props) {
 
       <HiddenInput typeDoc={typeDoc} />
 
-      <StatusInput />
+      {/* при обновлении страницы F5, глобальный store может быть ещё не проинициализирован
+        поэтому при установку дефолтного статуса надо писать так: status[0]?.code
+      */}
+      <StatusInput statusCode={doc?.statusCode || status[0]?.code} />
 
       <SubmitButton />
 

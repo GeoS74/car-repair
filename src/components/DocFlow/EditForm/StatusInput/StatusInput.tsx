@@ -1,9 +1,9 @@
 type Props = {
-  typeDoc: DocType
+  statusCode: number
 }
 
-export default function StatusInput() {
+export default function StatusInput({statusCode}: Props) {
   return <>
-    {/* <input type="hidden" name="status" defaultValue={typeDoc.directing.id} /> */}
+    <input type="hidden" name="statusCode" defaultValue={statusCode} />
   </>
 }

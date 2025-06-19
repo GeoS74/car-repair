@@ -111,6 +111,8 @@ interface IDoc {
 
   deadLine?: string
   sum?: number
+
+  statusCode?: number
 }
 
 interface IDocUnit {
