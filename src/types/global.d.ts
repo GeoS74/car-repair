@@ -213,3 +213,9 @@ type PropsRoles = {
   id: string,
   title: string
 }
+
+// тип объекта со статусами документа
+type IStatus = {
+  code: number,
+  title: string
+}

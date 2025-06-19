@@ -55,7 +55,7 @@ export default {
     {
       path: "/docflow/create/order",
       element: <CreateDoc tpl="order" />,
-      loader: () => fetchWrapper(_getStatus).catch(() => redirect('/auth'))
+      loader: () => session.start(),
     },
     {
       path: "/docflow/edit/doc/:id",
@@ -83,14 +83,6 @@ function _getDoc(id?: string) {
 
 function _searchDocs(queryParams: string) {
   return fetch(`${serviceHost("informator")}/api/informator/docflow/search/doc/${queryParams}`, {
-    headers: {
-      'Authorization': `Bearer ${tokenManager.getAccess()}`
-    }
-  })
-}
-
-function _getStatus() {
-  return fetch(`${serviceHost("informator")}/api/informator/status`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     }

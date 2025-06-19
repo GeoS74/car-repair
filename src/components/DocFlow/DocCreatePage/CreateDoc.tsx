@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default function CreateDoc({ tpl }: Props) {
-  session.subscribe('CreateInvoice');
+  session.subscribe('CreateDoc');
 
   // стандартная логика создания документа
   const [typeDoc, setTypeDoc] = useState<DocType>();

@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useNavigate, NavigateFunction, useLoaderData } from "react-router-dom";
+import { useNavigate, NavigateFunction } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { StoreState } from "../../../store";
 
 import tokenManager from "../../../libs/token.manager"
 import serviceHost from "../../../libs/service.host"
@@ -16,6 +18,7 @@ import styles from "./styles.module.css"
 import SubmitButton from "./SubmitButton/SubmitButton";
 import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import StatusInput from "./StatusInput/StatusInput";
+ 
 
 type Props = {
   typeDoc: DocType
@@ -24,8 +27,8 @@ type Props = {
 
 export default function EditForm({ doc, typeDoc }: Props) {
 
-  const statusList = useLoaderData();
-  console.log(statusList)
+  const status = useSelector((state: StoreState) => state.status.items);
+  console.log(status)
 
 
   const [disabled, setDisabled] = useState(false)
