@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, NavigateFunction } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { StoreState } from "../../../store";
+import { StoreState } from "../../../store/index";
 
 import tokenManager from "../../../libs/token.manager"
 import serviceHost from "../../../libs/service.host"
@@ -68,7 +68,7 @@ export default function EditForm({ typeDoc, doc }: Props) {
       {/* при обновлении страницы F5, глобальный store может быть ещё не проинициализирован
         поэтому при установку дефолтного статуса надо писать так: status[0]?.code
       */}
-      <StatusInput statusCode={doc?.statusCode || 11} />
+      <StatusInput statusCode={doc?.statusCode || 10} />
 
       <SubmitButton />
 

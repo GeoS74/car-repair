@@ -17,7 +17,7 @@ type Props = {
 export default function ChangeStatusButton({ id, statusMode, setDoc, directing, task }: Props) {
   const [disabled, setDisabled] = useState(false)
 
-  const action = statusMode === 'next' ? 'Завершить этап' : 'На доработку';
+  const action = statusMode === 'next' ? 'Следующий этап' : 'На доработку';
 
   // проверяет может ли пользователь менять статусы у данного типа документов
   if (_actionFinder(session.getMe()?.roles[0], directing.id, task.id, 'Изменять статусы')) {
@@ -38,23 +38,28 @@ function chanchging(
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   setDisabled(true);
+
+  const fd = new FormData();
+  fd.append('statusCode', '20');
+
   // const path = statusMode === 'acceptor' ? "accepting" : "recipienting";
   fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/changeStatus/${id}`, {
     method: 'PATCH',
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     },
+    body: fd
   }))
-    // .then(responseNotIsArray)
-    // .then(async response => {
-    //   if (response.ok) {
-    //     const res = await response.json();
-    //     setDoc(res);
-    //     return;
-    //   }
-    //   throw new Error(`response status: ${response.status}`)
-    // })
-    // .catch(error => console.log(error.message))
+    .then(responseNotIsArray)
+    .then(async response => {
+      if (response.ok) {
+        const res = await response.json();
+        setDoc(res);
+        return;
+      }
+      throw new Error(`response status: ${response.status}`)
+    })
+    .catch(error => console.log(error.message))
     .finally(() => setDisabled(false));
 }
 
