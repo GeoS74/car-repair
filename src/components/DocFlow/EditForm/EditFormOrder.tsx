@@ -18,7 +18,7 @@ import styles from "./styles.module.css"
 import SubmitButton from "./SubmitButton/SubmitButton";
 import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import StatusInput from "./StatusInput/StatusInput";
- 
+
 
 type Props = {
   typeDoc: DocType
@@ -28,7 +28,6 @@ type Props = {
 export default function EditForm({ typeDoc, doc }: Props) {
 
   const status = useSelector((state: StoreState) => state.status.items);
-  console.log(status)
 
   const [disabled, setDisabled] = useState(false)
   const [errorMessage, setErrorResponse] = useState<IErrorMessage>();
@@ -69,7 +68,7 @@ export default function EditForm({ typeDoc, doc }: Props) {
       {/* при обновлении страницы F5, глобальный store может быть ещё не проинициализирован
         поэтому при установку дефолтного статуса надо писать так: status[0]?.code
       */}
-      <StatusInput statusCode={doc?.statusCode || status[0]?.code} />
+      <StatusInput statusCode={doc?.statusCode || 11} />
 
       <SubmitButton />
 
@@ -128,6 +127,8 @@ function _getErrorResponse(error: string): IErrorMessage {
       return { field: "taskSelect", message: "Не выбран тип документа" }
     case "bad mime type":
       return { field: "fileUpload", message: "Не поддерживаемый тип файлов" }
+    case "invalid status code":
+      return { field: "title", message: "Передан не верный статус документа" }
     default: return { field: "", message: "" }
   }
 }
