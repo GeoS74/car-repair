@@ -14,7 +14,7 @@ export default function AddOrderButton() {
 
   return <button type="button"
     className={classNames(`btn btn-outline-primary`, styles.root)}
-    onClick={() => navigate('/docflow/create/order', {state: docsForCreation})}
+    onClick={() => navigate('/docflow/create/order', {state: docsForCreation[0]})}
   >Создать заказ</button>
 }
 

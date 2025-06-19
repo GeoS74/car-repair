@@ -3,6 +3,7 @@ import { useState } from "react";
 import session from "../../../libs/token.manager"
 import DocSelectType from "../DocSelectType/Wrapper";
 import EditForm from "../EditForm/Wrapper";
+import { useLocation } from "react-router-dom";
 
 type Props = {
   tpl?: DocTemplateName
@@ -11,10 +12,28 @@ type Props = {
 export default function CreateDoc({ tpl }: Props) {
   session.subscribe('CreateInvoice');
 
+  // стандартная логика создания документа
   const [typeDoc, setTypeDoc] = useState<DocType>();
+
+  // если компонента создания заказ-наряда AddOrderButton прокидывет данные
+  // использовать их для заполнения состояния
+  const locState = useLocation().state;
+  if(!typeDoc && locState) {
+    if(locState?.directing && locState?.task){
+      setTypeDoc({
+        directing: locState.directing,
+        task: locState?.task
+      });
+    }
+  }
+
+
 
   if(typeDoc?.directing && typeDoc.task) {
     
+    if(typeDoc.task.title === 'Заказ-наряд') {
+      return <EditForm tpl="order" typeDoc={typeDoc}/>
+    }
     if(typeDoc.task.title === 'Счёт') {
       return <EditForm tpl="invoice" typeDoc={typeDoc}/>
     }
