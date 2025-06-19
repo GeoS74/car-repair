@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import session from "../../../../libs/token.manager";
-import finder from "../../../../libs/deep.finder";
+// import finder from "../../../../libs/deep.finder";
 import classNames from "classnames";
 import styles from "./styles.module.css";
 
@@ -14,7 +14,7 @@ export default function AddOrderButton() {
 
   return <button type="button"
     className={classNames(`btn btn-outline-primary`, styles.root)}
-    onClick={() => navigate('/docflow/create/doc')}
+    onClick={() => navigate('/docflow/create/order', {state: docsForCreation})}
   >Создать заказ</button>
 }
 
@@ -27,7 +27,14 @@ export default function AddOrderButton() {
 //   }
 // если возвращённый массив содержит только один объект, 
 // то можно однозначно сказать какой тип документа доступен пользователю для создания
-function _getAvailableDocumentsForCreation(roles?: IRole[]){
+function _getAvailableDocumentsForCreation(roles?: IRole[]): 
+    {
+      role: ISimpleRow, 
+      directing: ISimpleRow, 
+      task: ISimpleRow
+    }[]
+  {
+
   const result = [];
 
   if(!roles) return [];

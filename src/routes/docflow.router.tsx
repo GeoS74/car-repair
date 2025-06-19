@@ -53,6 +53,11 @@ export default {
       loader: () => session.start(),
     },
     {
+      path: "/docflow/create/order",
+      element: <CreateDoc tpl="order" />,
+      loader: () => session.start(),
+    },
+    {
       path: "/docflow/edit/doc/:id",
       element: <EditDoc />,
       loader: ({ params }: LoaderFunctionArgs) => fetchWrapper(() => _getDoc(params.id))
