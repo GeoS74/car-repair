@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { StoreState } from "../../../../store/index";
 import session from "../../../../libs/token.manager"
 import tokenManager from "../../../../libs/token.manager"
 import serviceHost from "../../../../libs/service.host"
@@ -12,10 +14,18 @@ type Props = {
   setDoc: React.Dispatch<React.SetStateAction<IDoc>>
   directing: ISimpleRow
   task: ISimpleRow
+  statusCode?: number
 }
 
-export default function ChangeStatusButton({ id, statusMode, setDoc, directing, task }: Props) {
-  const [disabled, setDisabled] = useState(false)
+export default function ChangeStatusButton({ id, statusMode, statusCode, setDoc, directing, task }: Props) {
+  const statuses = useSelector((state: StoreState) => state.status.items);
+  const [disabled, setDisabled] = useState(false);
+
+  const newStatusCode = _getNewStatusCode(statuses, statusMode, statusCode);
+
+  if(!newStatusCode) {
+    return <></>;
+  }
 
   const action = statusMode === 'next' ? 'Следующий этап' : 'На доработку';
 
@@ -25,22 +35,38 @@ export default function ChangeStatusButton({ id, statusMode, setDoc, directing, 
     return <button
       type="button"
       disabled={disabled}
-      className={classNames("btn", statusMode === 'next' ? "btn-success" : "btn-info")}
-      onClick={() => chanchging(id, statusMode, setDoc, setDisabled)}>{action}</button>
+      className={classNames("btn", statusMode === 'next' ? "btn-success" : "btn-outline-warning")}
+      onClick={() => chanchging(id, newStatusCode.code, setDoc, setDisabled)}>{action}</button>
   }
   return <></>
 }
 
+function _getNewStatusCode(
+  statuses: IStatus[],
+  statusMode: ChangeStatusModeMode,
+  statusCode?: number
+){
+  if(!statusCode) return;
+
+  const currentIndex = statuses.findIndex(s => s.code === statusCode);
+
+  if(statusMode === 'next') {
+    return statuses[currentIndex+1] || undefined;
+  }
+
+  return statuses[currentIndex-1] || undefined;
+}
+
 function chanchging(
   id: string,
-  statusMode: ChangeStatusModeMode,
+  newStatusCode: number,
   setDoc: React.Dispatch<React.SetStateAction<IDoc>>,
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   setDisabled(true);
 
   const fd = new FormData();
-  fd.append('statusCode', '20');
+  fd.append('statusCode', newStatusCode.toString());
 
   // const path = statusMode === 'acceptor' ? "accepting" : "recipienting";
   fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/changeStatus/${id}`, {
