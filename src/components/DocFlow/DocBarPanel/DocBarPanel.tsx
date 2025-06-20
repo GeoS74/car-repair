@@ -52,7 +52,7 @@ export default function DocBarPanel() {
       />
 
       <DocBar
-        title="Мои документы"
+        title="Список заказ-нарядов"
         Icon={IconFolder}
         queryString="?limit=50"
       />

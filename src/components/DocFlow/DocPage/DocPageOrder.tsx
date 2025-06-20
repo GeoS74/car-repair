@@ -4,28 +4,34 @@ import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import FileLinkedList from "./FileLinkedList/FileLinkedList";
 import Description from "./Description/Description";
 import Author from "./Author/Author";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 import Status from "./Status/Status";
 import ChangeStatusButton from "./ChangeStatusButton/ChangeStatusButton";
+import Comments from "../Comments/Comments";
 
 export default function DocPageOrder({ ...loaderDoc }: IDoc) {
-  const [doc, setDoc] = useState({ ...loaderDoc })
+  const [doc, setDoc] = useState({ ...loaderDoc });
+  const [comments, setComments] = useState();
 
-  return <div className={styles.root}>
+  return <>
+    <div className={styles.root}>
 
-    <OptionalHeader {...doc} />
+      <OptionalHeader {...doc} />
 
-    <Status statusCode={doc.statusCode} />
+      <Status statusCode={doc.statusCode} />
 
-    <h4 className="mt-4">{doc.title}</h4>
+      <h4 className="mt-4">{doc.title}</h4>
 
-    <Description {...doc} />
+      <Description {...doc} />
 
-    <FileLinkedList files={doc.files} />
+      <FileLinkedList files={doc.files} />
 
-    <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} />
-    <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} />
+      <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} />
+      <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} />
 
-    <Author {...doc} />
-  </div>
+      <Author {...doc} />
+    </div>
+    
+    <Comments />
+  </>
 }

@@ -11,6 +11,10 @@ export default function WrapEditForm() {
     task: doc.task as ITask 
   }
 
+  if(doc.task.title === 'Заказ-наряд') {
+    return <EditForm tpl="order" typeDoc={typeDoc} doc={doc} />
+  }
+
   if(doc.task.title === 'Счёт') {
     return <EditForm tpl="invoice" typeDoc={typeDoc} doc={doc} />
   }
