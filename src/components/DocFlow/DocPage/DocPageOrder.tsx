@@ -32,6 +32,6 @@ export default function DocPageOrder({ ...loaderDoc }: IDoc) {
       <Author {...doc} />
     </div>
     
-    <Comments />
+    <Comments docId={doc.id}/>
   </>
 }
