@@ -116,11 +116,20 @@ interface IDoc {
   statusCode?: number
 }
 
+interface IComment {
+  id: string
+  comment: string
+  author: IDocUnit
+  files: IStaticFile[]
+  createdAt: string
+}
+
 interface IDocUnit {
   uid: string
   email: string
   name: string
   position: string
+  photo?: string
 }
 
 interface IDocSignatory extends IDocUnit{

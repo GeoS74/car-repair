@@ -8,10 +8,10 @@ import DocPageOrder from "./DocPageOrder";
 export default function DocPage() {
   session.subscribe('DocPage');
 
-  const doc = useLoaderData() as IDoc;
+  const [doc, comments] = useLoaderData() as [IDoc, IComment[]];
 
   if(doc.task.title === 'Заказ-наряд') {
-    return <DocPageOrder {...doc} />
+    return <DocPageOrder docLoad={doc} commentsLoad={comments} />
   }
 
   if(doc.task.title === 'Счёт') {

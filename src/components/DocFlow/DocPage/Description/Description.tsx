@@ -1,7 +1,7 @@
 import { Converter } from "md-conv";
 import { Link } from "react-router-dom";
 
-const converter = new Converter()
+const converter = new Converter();
 
 type Props = {
   description: string

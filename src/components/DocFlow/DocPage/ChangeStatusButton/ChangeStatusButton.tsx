@@ -14,16 +14,17 @@ type Props = {
   setDoc: React.Dispatch<React.SetStateAction<IDoc>>
   directing: ISimpleRow
   task: ISimpleRow
-  statusCode?: number
+  statusCode?: number,
+  addComment: (comment: IComment) => void
 }
 
-export default function ChangeStatusButton({ id, statusMode, statusCode, setDoc, directing, task }: Props) {
+export default function ChangeStatusButton({ id, statusMode, statusCode, setDoc, directing, task, addComment }: Props) {
   const statuses = useSelector((state: StoreState) => state.status.items);
   const [disabled, setDisabled] = useState(false);
 
-  const newStatusCode = _getNewStatusCode(statuses, statusMode, statusCode);
+  const newStatus = _getNewStatusCode(statuses, statusMode, statusCode);
 
-  if(!newStatusCode) {
+  if(!newStatus) {
     return <></>;
   }
 
@@ -36,7 +37,10 @@ export default function ChangeStatusButton({ id, statusMode, statusCode, setDoc,
       type="button"
       disabled={disabled}
       className={classNames("btn", statusMode === 'next' ? "btn-success" : "btn-outline-warning")}
-      onClick={() => chanchging(id, newStatusCode.code, setDoc, setDisabled)}>{action}</button>
+      onClick={() => {
+        _chanchging(id, newStatus.code, setDoc, setDisabled);
+        _autoComments(id, newStatus.title, addComment, statusMode);
+      }}>{action}</button>
   }
   return <></>
 }
@@ -57,7 +61,7 @@ function _getNewStatusCode(
   return statuses[currentIndex-1] || undefined;
 }
 
-function chanchging(
+function _chanchging(
   id: string,
   newStatusCode: number,
   setDoc: React.Dispatch<React.SetStateAction<IDoc>>,
@@ -68,7 +72,6 @@ function chanchging(
   const fd = new FormData();
   fd.append('statusCode', newStatusCode.toString());
 
-  // const path = statusMode === 'acceptor' ? "accepting" : "recipienting";
   fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/changeStatus/${id}`, {
     method: 'PATCH',
     headers: {
@@ -99,4 +102,36 @@ function _actionFinder(
     ?.directings.find(e => e.id === idDirecting)
     ?.tasks.find(e => e.id === idTask)
     ?.actions.find(e => e.title === action);
+}
+
+function _autoComments(
+  id: string,
+  newStatusTitle: string,
+  addComment: (comment: IComment) => void,
+  statusMode: ChangeStatusModeMode
+){
+  const fd = new FormData();
+  fd.append('docId', id.toString());
+
+  const action = statusMode === 'next' ? 'перевёл заказ на следующий статус' : 'вернул назад на этап';
+
+  fd.append('comment', `${action} "${newStatusTitle}"`);
+
+  fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/doccomments`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${tokenManager.getAccess()}`
+      },
+      body: fd
+    }))
+      .then(responseNotIsArray)
+      .then(async response => {
+        if (response.ok) {
+          const res = await response.json();
+          addComment(res);
+          return;
+        }
+        throw new Error(`response status: ${response.status}`)
+      })
+      .catch(error => console.log(error.message));
 }

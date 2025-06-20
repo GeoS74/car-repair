@@ -32,13 +32,19 @@ export default {
     {
       path: "/docflow/:id",
       element: <DocPage />,
-      loader: ({ params }: LoaderFunctionArgs) => fetchWrapper(() => _getDoc(params.id))
-        .then(responseNotIsArray)
-        .then(res => {
-          if (res.status === 404) {
-            return redirect('/docflow')
+      loader: ({ params }: LoaderFunctionArgs) => fetchWrapper([() => _getDoc(params.id), () => _getComments(params.id)])
+        .then(async res => {
+          if (Array.isArray(res)) {
+             
+            if (res[0].status === 404) {
+              return redirect('/docflow')
+            }
+
+            return [
+              await _doc(res[0]),
+              await _comment(res[1]),
+            ]
           }
-          return res;
         })
         .catch(() => redirect('/auth'))
     },
@@ -73,8 +79,26 @@ export default {
   ]
 }
 
+async function _doc(res: Response) {
+  if (res.ok) return await res.json()
+  throw new Error()
+}
+async function _comment(res: Response) {
+  if (res.ok) return await res.json()
+  throw new Error()
+}
+
+
 function _getDoc(id?: string) {
   return fetch(`${serviceHost("informator")}/api/informator/docflow/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  })
+}
+
+function _getComments(id?: string) {
+  return fetch(`${serviceHost("informator")}/api/informator/doccomments/search/?docId=${id}`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     }

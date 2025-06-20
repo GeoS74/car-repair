@@ -9,9 +9,14 @@ import Status from "./Status/Status";
 import ChangeStatusButton from "./ChangeStatusButton/ChangeStatusButton";
 import Comments from "../Comments/Comments";
 
-export default function DocPageOrder({ ...loaderDoc }: IDoc) {
-  const [doc, setDoc] = useState({ ...loaderDoc });
-  const [comments, setComments] = useState();
+type Props = {
+  docLoad: IDoc,
+  commentsLoad: IComment[]
+}
+
+export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
+  const [doc, setDoc] = useState(docLoad);
+  const [comments, setComments] = useState(commentsLoad);
 
   return <>
     <div className={styles.root}>
@@ -26,12 +31,12 @@ export default function DocPageOrder({ ...loaderDoc }: IDoc) {
 
       <FileLinkedList files={doc.files} />
 
-      <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} />
-      <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} />
+      <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])}/>
+      <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])}/>
 
       <Author {...doc} />
     </div>
     
-    <Comments docId={doc.id}/>
+    <Comments docId={doc.id} comments={comments} addComment={(comment: IComment) => setComments([comment, ...comments])} />
   </>
 }
