@@ -1,18 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import serviceHost from "../../libs/service.host";
+import tokenManager from "../../libs/token.manager";
+import fetchWrapper from "../../libs/fetch.wrapper"
+import { responseNotIsArray } from "../../middleware/response.validator";
+
 
 export const fetchStatus = createAsyncThunk(
   'data/fetchData',
-  async () => fetch(`${serviceHost("informator")}/api/informator/status`)
-  .then(async res => {
-    if(res.ok) {
-      return await res.json()
-    }
-    throw new Error(`error fetch status code ${res.status}`)
-  })
+  async () => fetchWrapper(_getStatuses)
+    .then(responseNotIsArray)
+    .then(async res => {
+      if (res.ok) {
+        return await res.json()
+      }
+      throw new Error(`error fetch status code ${res.status}`)
+    })
 );
 
-
+function _getStatuses() {
+  return fetch(`${serviceHost("informator")}/api/informator/status`, {
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  })
+}
 
 const initialState: {
   items: IStatus[],

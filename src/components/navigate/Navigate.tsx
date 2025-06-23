@@ -24,7 +24,7 @@ export default function Navigate() {
       <div>
         <nav className={classNames(styles.root, `navbar navbar-expand-lg navbar-${theme === 'light' ? 'primary' : 'dark'}`)}>
           <div className="container-fluid">
-            <Link className={classNames("navbar-brand")} to="/docflow"><h1>:)</h1></Link>
+            <Link className={classNames("navbar-brand")} to="/docflow"><h1>БОВИД</h1></Link>
 
             <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"
               onClick={_toggleMenu}
@@ -90,7 +90,7 @@ export default function Navigate() {
                     <span className="nav-link dropdown-toggle" onClick={(event) => event.currentTarget.nextElementSibling?.classList.toggle("show")}>Настройки</span>
                     <div className="dropdown-menu" onClick={(event) => event.currentTarget.classList.toggle("show")}>
                       <Link to="/setting/edit/roles" className="dropdown-item">Роли</Link>
-                      <Link to="/setting/edit/directings" className="dropdown-item">Направления</Link>
+                      <Link to="/setting/edit/directings" className="dropdown-item">Подразделения</Link>
                       <Link to="/setting/edit/processes" className="dropdown-item">Объекты</Link>
                       <Link to="/setting/edit/actions" className="dropdown-item">Действия</Link>
                       <Link to="/setting/edit/status" className="dropdown-item">Статусы</Link>

@@ -13,6 +13,7 @@ export default function CommentsRow({ author, comment, createdAt }: IComment) {
       <small>{date(createdAt)}</small>
       <CommentAvatar userPhoto={author.photo} />
       <p>{author.name}</p>
+      <p>{author.position}</p>
     </div>
 
     <div className="mt-4"
