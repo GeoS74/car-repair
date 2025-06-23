@@ -113,7 +113,7 @@ function _autoComments(
   const fd = new FormData();
   fd.append('docId', id.toString());
 
-  const action = statusMode === 'next' ? 'перевёл заказ на следующий статус' : 'вернул назад на этап';
+  const action = statusMode === 'next' ? 'перевёл заказ на следующий статус' : '<span style="color:red">вернул назад на этап</span>';
 
   fd.append('comment', `${action} "${newStatusTitle}"`);
 

@@ -1,0 +1,8 @@
+.root img,
+.root svg {
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+  color: var(--color) !important;
+  fill: var(--color) !important;
+}
