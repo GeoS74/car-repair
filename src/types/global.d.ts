@@ -231,3 +231,13 @@ type IStatus = {
   code: number,
   title: string
 }
+
+interface ICar {
+  id: string
+  carModel: string
+  yearProduction: string
+  vin: string
+  place: string
+  stateNumber: string
+}
+

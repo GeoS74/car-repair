@@ -7,15 +7,16 @@ import {
 // import serviceHost from "../libs/service.host"
 // import fetchWrapper from "../libs/fetch.wrapper"
 // import session from "../libs/token.manager"
-import Main from "../components/Main/Main"
-import catalogRouter from "./catalog.router"
-import authRouter from "./auth.router"
-import aboutCompanyRouter from "./about.router"
-import userRouter from "./user.router"
-import settingRouter from "./setting.router"
-import docFlowRouter from "./docflow.router"
-import newsLineRouter from "./newsLine.router"
-import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary"
+import Main from "../components/Main/Main";
+import catalogRouter from "./catalog.router";
+import authRouter from "./auth.router";
+import aboutCompanyRouter from "./about.router";
+import userRouter from "./user.router";
+import settingRouter from "./setting.router";
+import docFlowRouter from "./docflow.router";
+import newsLineRouter from "./newsLine.router";
+import carsRouter from "./car.list.router";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,8 @@ const router = createBrowserRouter([
   userRouter,
   settingRouter,
   docFlowRouter,
-  newsLineRouter
+  newsLineRouter,
+  carsRouter
 ])
 
 export default <RouterProvider router={router} />

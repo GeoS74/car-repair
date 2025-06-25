@@ -1,0 +1,26 @@
+.root>h1,
+.root>h2,
+.root>h3 {
+  color: var(--color);
+}
+
+.button {
+  border-radius: 10px;
+  border-width: 5px !important;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 30px 0 0 30px;
+}
+
+.task {    
+  max-width: 630px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: space-around;
+}

@@ -1,0 +1,57 @@
+import { useNavigate } from "react-router-dom";
+import session from "../../../../libs/token.manager"
+import tokenManager from "../../../../libs/token.manager"
+import fetchWrapper from "../../../../libs/fetch.wrapper";
+import serviceHost from "../../../../libs/service.host";
+import { responseNotIsArray } from "../../../../middleware/response.validator";
+
+import { ReactComponent as IconEdit } from "./icons/wrench.svg";
+import { ReactComponent as IconDelete } from "./icons/trash.svg";
+import styles from "./styles.module.css"
+
+export default function OptionalHeader({ id }: ICar) {
+  const navigate = useNavigate();
+
+  return <div className={styles.root}>
+    <div><small>Карточка автомобиля</small></div>
+    <div>
+      <small></small>
+
+      {session.getMe()?.rank === 'admin' ?
+        <IconEdit className={styles.svg}
+          onClick={() => navigate(`/cars/edit/car/${id}`)}
+        /> : <></>}
+
+      {session.getMe()?.rank === 'admin' ?
+        <IconDelete className={styles.svg}
+          onClick={async () => {
+            // ninja code ;)
+            await _delete(id) ? navigate(-1) : null;
+          }} /> : <></>}
+    </div>
+  </div>
+}
+
+async function _delete(id: string) {
+  if (!confirm('Удалить этот автомобиль?')) {
+    return false;
+  }
+
+  return fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/cars/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  }))
+    .then(responseNotIsArray)
+    .then(async response => {
+      if (response.ok) {
+        return true;
+      }
+      throw new Error(`response status: ${response.status}`)
+    })
+    .catch(error => {
+      console.log(error.message);
+      return false;
+    })
+}

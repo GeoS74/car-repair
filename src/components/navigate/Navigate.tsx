@@ -102,6 +102,13 @@ export default function Navigate() {
                   : <></>
                 }
 
+                {session.getMe()?.rank === 'admin' ?
+                  <li className="nav-item">
+                    <Link to="/cars" className="nav-link">Автомобили</Link>
+                  </li>
+                  : <></>
+                }
+
               </ul>
             </div>
           </div>
