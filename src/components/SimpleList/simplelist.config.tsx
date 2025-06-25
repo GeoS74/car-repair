@@ -22,9 +22,9 @@ export const simpleListConfig: ISimpleListConf  =  {
       },
       directings: {
         serviceName: 'informator',
-        title: "Список направлений",
-        placeholderSearch: "поиск направлений",
-        placeholder: "Направление",
+        title: "Список подразделений",
+        placeholderSearch: "поиск подразделений",
+        placeholder: "Подразделение",
         api: "/api/informator/directing",
       },
       tasks: {
