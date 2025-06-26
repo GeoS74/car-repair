@@ -1,7 +1,7 @@
-import finder from "../../../libs/deep.finder"
-import session from "../../../libs/token.manager"
-import styles from "./styles.module.css"
-import classNames from "classnames"
+import finder from "../../../libs/deep.finder";
+import session from "../../../libs/token.manager";
+import styles from "./styles.module.css";
+import classNames from "classnames";
 import CancelButton from "../EditForm/CancelButton/CancelButton";
 
 type Props = {

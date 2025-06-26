@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useNavigate, NavigateFunction } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { StoreState } from "../../../store/index";
 
 import tokenManager from "../../../libs/token.manager"
 import serviceHost from "../../../libs/service.host"
@@ -26,8 +24,6 @@ type Props = {
 }
 
 export default function EditForm({ typeDoc, doc }: Props) {
-
-  const status = useSelector((state: StoreState) => state.status.items);
 
   const [disabled, setDisabled] = useState(false)
   const [errorMessage, setErrorResponse] = useState<IErrorMessage>();
@@ -65,9 +61,6 @@ export default function EditForm({ typeDoc, doc }: Props) {
 
       <HiddenInput typeDoc={typeDoc} />
 
-      {/* при обновлении страницы F5, глобальный store может быть ещё не проинициализирован
-        поэтому при установку дефолтного статуса надо писать так: status[0]?.code
-      */}
       <StatusInput statusCode={doc?.statusCode || 10} />
 
       <SubmitButton />

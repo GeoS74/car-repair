@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import session from "../../../libs/token.manager"
 import DocSelectType from "../DocSelectType/Wrapper";
-import EditForm from "../EditForm/Wrapper";
+import WrapEditForm from "../EditForm/Wrapper";
 import { useLocation } from "react-router-dom";
 
 type Props = {
@@ -32,12 +32,12 @@ export default function CreateDoc({ tpl }: Props) {
   if(typeDoc?.directing && typeDoc.task) {
     
     if(typeDoc.task.title === 'Заказ-наряд') {
-      return <EditForm tpl="order" typeDoc={typeDoc}/>
+      return <WrapEditForm tpl="order" typeDoc={typeDoc}/>
     }
     if(typeDoc.task.title === 'Счёт') {
-      return <EditForm tpl="invoice" typeDoc={typeDoc}/>
+      return <WrapEditForm tpl="invoice" typeDoc={typeDoc}/>
     }
-    return <EditForm typeDoc={typeDoc}/>
+    return <WrapEditForm typeDoc={typeDoc}/>
   }
 
   if(tpl === 'invoice') {

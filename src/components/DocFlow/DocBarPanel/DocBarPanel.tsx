@@ -3,14 +3,14 @@
  */
 import DocBar from "./DocBar/DocBar";
 import session from "../../../libs/token.manager";
-// import finder from "../../../libs/deep.finder";
+import finder from "../../../libs/deep.finder";
 // import { ReactComponent as IconFoo } from "./icons/foo.svg";
 // import { ReactComponent as IconFilter } from "./icons/filter-square.svg";
 import { ReactComponent as IconFire } from "./icons/fire.svg";
 import { ReactComponent as IconFolder } from "./icons/folder.svg";
 import { ReactComponent as IconTools } from "./icons/tools.svg";
 import { ReactComponent as IconHandUp } from "./icons/hand-thumbs-up.svg";
-// import AddDocButton from "./AddDocButton/AddDocButton";
+import AddDocButton from "./AddDocButton/AddDocButton";
 import AddOrderButton from "./AddOrderButton/AddOrderButton";
 import DepAddInvoice from "./DepAddInvoice/DepAddInvoice";
 import DepInvocesForDirector from "./DepInvocesForDirector/DepInvocesForDirector";
@@ -23,11 +23,11 @@ export default function DocBarPanel() {
 
   return <div>
 
-    {/* {// стандартная кнопка
+    {// стандартная кнопка
     finder(session.getMe()?.roles, 'Создать') ?
       <AddDocButton />
       : <></>
-    } */}
+    }
 
     <AddOrderButton />
 
