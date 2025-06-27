@@ -23,48 +23,49 @@ export default function DocSelectCarForOrder({ typeDoc, doc }: Props) {
 
   useEffect(() => setMouseDown(false))
 
-  if (!currentCar) {
-    return <div
-      className={classNames(styles.root, "mt-4")}
-      onMouseDown={() => setMouseDown(true)}
-    >
-      <legend>Выбор автомобиля</legend>
-
-      <label htmlFor="searchCarInput" className="form-label mt-4">Укажите автомобиль из списка для заявки</label>
-      <input type="text"
-        className="form-control"
-        id="searchCarInput"
-        placeholder="начните вводить гос.номер или VIN"
-        autoComplete="off"
-
-        // срабатывает если фокус на input-е и автомобиль ещё не выбран
-        onFocus={(event) => {
-          if (!currentCar) {
-            _searchCar(event, setCars)
-          }
-        }}
-
-        onInput={(event) => _searchCar(event, setCars)}
-
-        onBlur={() => {
-          if (mouseDown) return;
-
-          if (cars.length) {
-            setCars([])
-          }
-        }}
-      />
-
-      <SelectCarList
-        cars={cars}
-        setCurrentCar={setCurrentCar}
-      />
-
-      <CancelButton />
-    </div>
+  if (currentCar) {
+    return <EditFormOrfer typeDoc={typeDoc} doc={doc} car={currentCar}/>
   }
 
-  return <EditFormOrfer typeDoc={typeDoc} doc={doc} />
+  return <div
+    className={classNames(styles.root, "mt-4")}
+    onMouseDown={() => setMouseDown(true)}
+  >
+    <legend>Выбор автомобиля</legend>
+
+    <label htmlFor="searchCarInput" className="form-label mt-4">Укажите автомобиль из списка для заявки</label>
+    <input type="text"
+      className="form-control"
+      id="searchCarInput"
+      placeholder="начните вводить гос.номер или VIN"
+      autoComplete="off"
+
+      // срабатывает если фокус на input-е и автомобиль ещё не выбран
+      onFocus={(event) => {
+        if (!currentCar) {
+          _searchCar(event, setCars)
+        }
+      }}
+
+      onInput={(event) => _searchCar(event, setCars)}
+
+      onBlur={() => {
+        if (mouseDown) return;
+
+        if (cars.length) {
+          setCars([])
+        }
+      }}
+    />
+
+    <SelectCarList
+      cars={cars}
+      setCurrentCar={setCurrentCar}
+    />
+
+    <CancelButton />
+  </div>
+
 }
 
 function _searchCar(

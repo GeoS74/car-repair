@@ -10,6 +10,8 @@ export default function DocPage() {
 
   const [doc, comments] = useLoaderData() as [IDoc, IComment[]];
 
+  console.log(doc);
+
   if(doc.task.title === 'Заказ-наряд') {
     return <DocPageOrder docLoad={doc} commentsLoad={comments} />
   }

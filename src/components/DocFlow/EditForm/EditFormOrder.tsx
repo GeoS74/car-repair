@@ -21,9 +21,10 @@ import StatusInput from "./StatusInput/StatusInput";
 type Props = {
   typeDoc: DocType
   doc?: IDoc
+  car?: ICar
 }
 
-export default function EditForm({ typeDoc, doc }: Props) {
+export default function EditForm({ typeDoc, doc, car }: Props) {
 
   const [disabled, setDisabled] = useState(false)
   const [errorMessage, setErrorResponse] = useState<IErrorMessage>();
@@ -60,6 +61,7 @@ export default function EditForm({ typeDoc, doc }: Props) {
         setFileList={(file: FileList) => setFileList([...fileList, file])} />
 
       <HiddenInput typeDoc={typeDoc} />
+      <input type="hidden" name="carId" defaultValue={car?.id} />
 
       <StatusInput statusCode={doc?.statusCode || 10} />
 

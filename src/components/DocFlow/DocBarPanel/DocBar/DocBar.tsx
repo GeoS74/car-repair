@@ -12,14 +12,15 @@ type Props = {
   title: string
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string | undefined }>
   queryString: string
+  isNavigating: boolean
 };
 
-export default function DocBar({ title, Icon, queryString }: Props) {
+export default function DocBar({ title, Icon, queryString, isNavigating }: Props) {
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
 
   if (session.getMe() && !count) {
-    getCountDocs(queryString, setCount)
+    getCountDocs(queryString, setCount, isNavigating)
   }
 
   return <div className={styles.root}
@@ -35,8 +36,11 @@ export default function DocBar({ title, Icon, queryString }: Props) {
 
 function getCountDocs(
   queryString: string,
-  setCount: React.Dispatch<React.SetStateAction<number>>
+  setCount: React.Dispatch<React.SetStateAction<number>>,
+  isNavigating: boolean
 ) {
+  if(isNavigating) return;
+  
   fetchWrapper(() => fetch(`${serviceHost("informator")}/api/informator/docflow/search/doc/count/${queryString}`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`

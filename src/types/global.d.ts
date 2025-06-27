@@ -114,6 +114,7 @@ interface IDoc {
   sum?: number
 
   statusCode?: number
+  car?: ICar
 }
 
 interface IComment {

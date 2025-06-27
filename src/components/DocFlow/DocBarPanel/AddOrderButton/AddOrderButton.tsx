@@ -5,7 +5,11 @@ import session from "../../../../libs/token.manager";
 import classNames from "classnames";
 import styles from "./styles.module.css";
 
-export default function AddOrderButton() {
+type Props = {
+  setIsNavigating: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function AddOrderButton({setIsNavigating}: Props) {
   const navigate = useNavigate();
 
   const docsForCreation = _getAvailableDocumentsForCreation(session.getMe()?.roles);
@@ -14,7 +18,10 @@ export default function AddOrderButton() {
 
   return <button type="button"
     className={classNames(`btn btn-outline-primary`, styles.root)}
-    onClick={() => navigate('/docflow/create/order', {state: docsForCreation[0]})}
+    onClick={() => {
+      setIsNavigating(true);
+      navigate('/docflow/create/order', {state: docsForCreation[0]});
+    }}
   >Создать заказ</button>
 }
 
