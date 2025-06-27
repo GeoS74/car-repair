@@ -48,28 +48,30 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
 
       <OptionalHeader directing={typeDoc.directing} task={typeDoc.task} {...doc} />
 
-      <legend className="mt-3">{!doc ? "Создание заказ-наряда" : "Изменение заказ-наряда"}</legend>
+      <legend className="mt-3">{!doc ? "Создание заказ-наряда" : "Редактирование заказ-наряда"}</legend>
 
-      <InputDefault
-        prefix="carModel"
-        label="Модель автомобиля"
-        val={car?.carModel}
-        disabled={true}
-      />
+      <div className={styles.disableInputs}>
+        <InputDefault
+          prefix="carModel"
+          label="Модель автомобиля"
+          val={car?.carModel}
+          disabled={true}
+        />
 
-      <InputDefault
-        prefix="stateNumber"
-        label="Гос. номер"
-        val={car?.stateNumber}
-        disabled={true}
-      />
+        <InputDefault
+          prefix="stateNumber"
+          label="Гос. номер"
+          val={car?.stateNumber}
+          disabled={true}
+        />
 
-      <InputDefault
-        prefix="stateNumber"
-        label="VIN-код"
-        val={car?.vin}
-        disabled={true}
-      />
+        <InputDefault
+          prefix="stateNumber"
+          label="VIN-код"
+          val={car?.vin}
+          disabled={true}
+        />
+      </div>
 
       <InputDefault
         prefix="title"
@@ -77,6 +79,7 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
         val={doc?.title}
         errorMessage={errorMessage}
       />
+
 
       <TextArea
         prefix="description"

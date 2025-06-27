@@ -21,3 +21,12 @@
   display: flex;
   flex-direction: row;
 }
+
+.disableInputs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.disableInputs div {
+  margin-right: 25px;
+}
