@@ -25,18 +25,24 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
 
       <Status statusCode={doc.statusCode} />
 
-      <h4 className="mt-4">{doc.title}</h4>
+      <h5 className="mt-4 mb-4">Заявка на ремонт: {doc.title}</h5>
 
+      <p>Автомобиль: {doc.car?.carModel}</p>
+      <p>Гос. номер: {doc.car?.stateNumber}</p>
+      <p>VIN номер(шасси): {doc.car?.vin} </p>
+
+      <hr></hr>
+      <p className="mt-4">Список неисправностей:</p>
       <Description {...doc} />
 
       <FileLinkedList files={doc.files} />
 
-      <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])}/>
-      <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])}/>
+      <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
+      <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
 
       <Author {...doc} />
     </div>
-    
+
     <Comments docId={doc.id} comments={comments} addComment={(comment: IComment) => setComments([comment, ...comments])} />
   </>
 }

@@ -4,13 +4,13 @@ import styles from "./styles.module.css";
 type Props = {
   directing: ISimpleRow
   task?: ISimpleRow
-  num?: number
+  title?: string
   createdAt?: string
 }
 
-export default function OptionalHeader({ directing, task, num, createdAt }: Props) {
+export default function OptionalHeader({ directing, task, title, createdAt }: Props) {
   return <div className={styles.root}>
-    <div>{num ? <small> № {num || 'б/н'} от {date(createdAt)}</small> : <></>}</div>
+    <div>{title ? <small> № {title || 'б/н'} от {date(createdAt)}</small> : <></>}</div>
     <div>
       <small>{directing.title} / {task?.title}</small>
     </div>

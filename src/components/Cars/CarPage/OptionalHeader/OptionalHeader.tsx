@@ -26,7 +26,7 @@ export default function OptionalHeader({ id }: ICar) {
         <IconDelete className={styles.svg}
           onClick={async () => {
             // ninja code ;)
-            await _delete(id) ? navigate(-1) : null;
+            await _delete(id) ? navigate(`/cars`) : null;
           }} /> : <></>}
     </div>
   </div>
@@ -47,6 +47,9 @@ async function _delete(id: string) {
     .then(async response => {
       if (response.ok) {
         return true;
+      }
+      if(response.status === 400) {
+        alert('Этот автомобиль нельзя удалять! Есть документы, которые на него ссылаются!')
       }
       throw new Error(`response status: ${response.status}`)
     })

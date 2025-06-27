@@ -16,9 +16,8 @@ type Props = {
 }
 
 export default function DocSelectCarForOrder({ typeDoc, doc }: Props) {
-  const [currentCar, setCurrentCar] = useState<ICar>();
+  const [currentCar, setCurrentCar] = useState<ICar | undefined>(doc?.car);
   const [cars, setCars] = useState<ICar[]>([]);
-
   const [mouseDown, setMouseDown] = useState(false);
 
   useEffect(() => setMouseDown(false))

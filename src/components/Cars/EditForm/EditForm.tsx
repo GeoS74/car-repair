@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useNavigate, NavigateFunction, useLoaderData } from "react-router-dom";
 
-import tokenManager from "../../../libs/token.manager"
-import serviceHost from "../../../libs/service.host"
-import fetchWrapper from "../../../libs/fetch.wrapper"
-import { responseNotIsArray } from "../../../middleware/response.validator"
+import tokenManager from "../../../libs/token.manager";
+import serviceHost from "../../../libs/service.host";
+import fetchWrapper from "../../../libs/fetch.wrapper";
+import { responseNotIsArray } from "../../../middleware/response.validator";
 
-import Input from "./Input/Input";
-import CancelButton from "./CancelButton/CancelButton";
-import SubmitButton from "./SubmitButton/SubmitButton";
-import styles from "./styles.module.css"
+import InputDefault from "../../Form/Input/InputDefault";
+import ButtonCancel from "../../Form/ButtonCancel/ButtonCancel";
+import ButtonSubmit from "../../Form/ButtonSubmit/ButtonSubmit";
+import styles from "./styles.module.css";
 
 export default function EditForm() {
   const car = useLoaderData() as ICar;
@@ -35,39 +35,39 @@ export default function EditForm() {
 
       <legend className="mt-3">{!car ? "Добавление автомобиля" : "Изменение автомобиля"}</legend>
 
-      <Input
+      <InputDefault
         prefix="carModel"
         label="Модель автомобиля"
         val={car?.carModel}
         errorMessage={errorMessage} />
 
-      <Input
+      <InputDefault
         prefix="stateNumber"
         label="Гос. номер"
         val={car?.stateNumber}
         errorMessage={errorMessage} />
 
-      <Input
+      <InputDefault
         prefix="vin"
         label="VIN-code"
         val={car?.vin}
         errorMessage={errorMessage} />
 
-      <Input
+      <InputDefault
         prefix="yearProduction"
         label="Год выпуска"
         val={car?.yearProduction}
         errorMessage={errorMessage} />
 
-      <Input
+      <InputDefault
         prefix="place"
         label="Местонахождение автомобиля"
         val={car?.place}
         errorMessage={errorMessage} />
 
-      <SubmitButton />
+      <ButtonSubmit />
 
-      <CancelButton />
+      <ButtonCancel />
     </fieldset>
   </form>
 }

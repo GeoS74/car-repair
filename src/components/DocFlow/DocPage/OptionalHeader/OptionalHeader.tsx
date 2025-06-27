@@ -10,11 +10,11 @@ import { ReactComponent as IconEdit } from "./icons/wrench.svg";
 import { ReactComponent as IconDelete } from "./icons/trash.svg";
 import styles from "./styles.module.css"
 
-export default function OptionalHeader({ id, directing, task, num, createdAt }: IDoc) {
+export default function OptionalHeader({ id, directing, task, title, createdAt }: IDoc) {
   const navigate = useNavigate();
 
   return <div className={styles.root}>
-    <div><small> № {num || 'б/н'} от {date(createdAt)}</small></div>
+    <div><small> № {title || 'б/н'} от {date(createdAt)}</small></div>
     <div>
       <small>{directing.title} / {task.title}</small>
 

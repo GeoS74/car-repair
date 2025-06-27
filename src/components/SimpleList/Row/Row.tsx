@@ -44,9 +44,9 @@ export default function Row({ id, title, idActiveRow, setIdActiveRow, listConf, 
         /
         <span className="text-muted"
           onClick={() => {
-            if (!confirm('Delete this row?')) return;
-            setVisible(false)
-            _deleteRow(listConf.serviceName, id, listConf.api);
+            if (!confirm('Удалить эту запись?')) return;
+            // setVisible(false)
+            _deleteRow(listConf.serviceName, id, listConf.api, setVisible);
           }} >Удалить</span>
       </> : valueRow}
     </li>
@@ -58,7 +58,8 @@ export default function Row({ id, title, idActiveRow, setIdActiveRow, listConf, 
 function _deleteRow(
   serviceName: ServiceName,
   id: number,
-  api: string
+  api: string,
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   return fetch(`${serviceHost(serviceName)}${api}/${id}`, {
     method: 'DELETE',
@@ -68,6 +69,11 @@ function _deleteRow(
   })
     .then(async response => {
       if (response.ok) {
+        setVisible(false);
+        return;
+      }
+      if(response.status === 400){
+        alert('Эту запись нельзя удалять!')
         return;
       }
       throw new Error(`response status: ${response.status}`)

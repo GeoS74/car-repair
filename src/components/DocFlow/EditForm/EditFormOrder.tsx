@@ -5,17 +5,18 @@ import tokenManager from "../../../libs/token.manager"
 import serviceHost from "../../../libs/service.host"
 import fetchWrapper from "../../../libs/fetch.wrapper"
 import { responseNotIsArray } from "../../../middleware/response.validator"
-import TextPane from "./TextPane/TextPane";
-import TitleDoc from "./TitleDoc/TitleDoc";
 import FileInput from "./FileInput/FileInput";
 import FileLinkList from "./FileLinkList/FileLinkList"
 import FileNameList from "./FileNameList/FileNameList"
 import HiddenInput from "./HiddenInput/HiddenInput";
-import CancelButton from "./CancelButton/CancelButton";
-import styles from "./styles.module.css"
-import SubmitButton from "./SubmitButton/SubmitButton";
 import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import StatusInput from "./StatusInput/StatusInput";
+
+import InputDefault from "../../Form/Input/InputDefault";
+import TextArea from "../../Form/TextArea/TextArea";
+import ButtonCancel from "../../Form/ButtonCancel/ButtonCancel";
+import ButtonSubmit from "../../Form/ButtonSubmit/ButtonSubmit";
+import styles from "./styles.module.css"
 
 
 type Props = {
@@ -49,9 +50,39 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
 
       <legend className="mt-3">{!doc ? "Создание заказ-наряда" : "Изменение заказ-наряда"}</legend>
 
-      <TitleDoc errorMessage={errorMessage} title={doc?.title} />
+      <InputDefault
+        prefix="carModel"
+        label="Модель автомобиля"
+        val={car?.carModel}
+        disabled={true}
+      />
 
-      <TextPane description={doc?.description} />
+      <InputDefault
+        prefix="stateNumber"
+        label="Гос. номер"
+        val={car?.stateNumber}
+        disabled={true}
+      />
+
+      <InputDefault
+        prefix="stateNumber"
+        label="VIN-код"
+        val={car?.vin}
+        disabled={true}
+      />
+
+      <InputDefault
+        prefix="title"
+        label="Номер заявки на ремонт"
+        val={doc?.title}
+        errorMessage={errorMessage}
+      />
+
+      <TextArea
+        prefix="description"
+        label="Список неисравностей"
+        val={doc?.description}
+      />
 
       <FileLinkList docId={doc?.id} files={doc?.files} />
 
@@ -65,9 +96,9 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
 
       <StatusInput statusCode={doc?.statusCode || 10} />
 
-      <SubmitButton />
+      <ButtonSubmit />
 
-      <CancelButton />
+      <ButtonCancel />
     </fieldset>
   </form>
 }
@@ -115,7 +146,7 @@ function _onSubmit(
 function _getErrorResponse(error: string): IErrorMessage {
   switch (error) {
     case "invalid title":
-      return { field: "title", message: "Введите название документа" }
+      return { field: "title", message: "Введите номер заявки на ремонт" }
     case "invalid directing id":
       return { field: "directSelect", message: "Не выбрано направление" }
     case "invalid task id":
