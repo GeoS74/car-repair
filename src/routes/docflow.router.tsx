@@ -1,13 +1,13 @@
 import { redirect, LoaderFunctionArgs } from "react-router-dom";
 
-import serviceHost from "../libs/service.host"
-import fetchWrapper from "../libs/fetch.wrapper"
-import tokenManager from "../libs/token.manager"
+import serviceHost from "../libs/service.host";
+import fetchWrapper from "../libs/fetch.wrapper";
+import tokenManager from "../libs/token.manager";
 import { responseNotIsArray } from "../middleware/response.validator";
-import session from "../libs/token.manager";
+import { _getMe } from "../libs/auth.user";
 
-import DocFlow from "../components/DocFlow/DocFlow"
-import DocList from "../components/DocFlow/DocList/DocList"
+import DocFlow from "../components/DocFlow/DocFlow";
+import DocList from "../components/DocFlow/DocList/DocList";
 import DocPage from "../components/DocFlow/DocPage/Wrapper";
 import DocBarPanel from "../components/DocFlow/DocBarPanel/DocBarPanel";
 import CreateDoc from "../components/DocFlow/DocCreatePage/CreateDoc";
@@ -20,7 +20,8 @@ export default {
     {
       index: true,
       element: <DocBarPanel />,
-      loader: () => session.start(),
+      loader: () => fetchWrapper(_getMe)
+        .catch(() => redirect('/auth')),
     },
     {
       path: "/docflow/list",
@@ -35,7 +36,6 @@ export default {
       loader: ({ params }: LoaderFunctionArgs) => fetchWrapper([() => _getDoc(params.id), () => _getComments(params.id)])
         .then(async res => {
           if (Array.isArray(res)) {
-             
             if (res[0].status === 404) {
               return redirect('/docflow')
             }
@@ -51,17 +51,14 @@ export default {
     {
       path: "/docflow/create/doc",
       element: <CreateDoc />,
-      loader: () => session.start(),
-    },
-    {
-      path: "/docflow/create/invoice",
-      element: <CreateDoc tpl="invoice" />,
-      loader: () => session.start(),
+      loader: () => fetchWrapper(_getMe)
+        .catch(() => redirect('/auth')),
     },
     {
       path: "/docflow/create/order",
       element: <CreateDoc tpl="order" />,
-      loader: () => session.start(),
+      loader: () => fetchWrapper(_getMe)
+        .catch(() => redirect('/auth')),
     },
     {
       path: "/docflow/edit/doc/:id",
@@ -72,7 +69,7 @@ export default {
           if (res.status === 404) {
             return redirect('/docflow')
           }
-          return res;
+          return _doc(res);
         })
         .catch(() => redirect('/auth'))
     },

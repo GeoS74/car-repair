@@ -1,11 +1,12 @@
 import { redirect } from "react-router-dom";
 
-import serviceHost from "../libs/service.host"
-import fetchWrapper from "../libs/fetch.wrapper"
-import User from "../components/User/User"
+import serviceHost from "../libs/service.host";
+import fetchWrapper from "../libs/fetch.wrapper";
+import User from "../components/User/User";
 import UserPage from "../components/User/UserPage/UserPage";
 import ChangePassword from "../components/User/ChangePassword/ChangePassword";
-import tokenManager from "../libs/token.manager"
+import tokenManager from "../libs/token.manager";
+import { _getMe, _getUser } from "../libs/auth.user";
 
 export default {
   path: "/user",
@@ -57,22 +58,6 @@ async function _user(res: Response) {
     return await _createUser(userMaut?.name || '')
   }
   throw new Error()
-}
-
-function _getMe() {
-  return fetch(`${serviceHost("mauth")}/api/mauth/access/`, {
-    headers: {
-      'Authorization': `Bearer ${tokenManager.getAccess()}`
-    }
-  })
-}
-
-function _getUser() {
-  return fetch(`${serviceHost("informator")}/api/informator/user/`, {
-    headers: {
-      'Authorization': `Bearer ${tokenManager.getAccess()}`
-    }
-  })
 }
 
 function _createUser(name: string) {
