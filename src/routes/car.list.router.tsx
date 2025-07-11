@@ -59,13 +59,23 @@ export default {
       path: "/cars/upload/excel",
       element: <UploadCars />,
       loader: () => fetchWrapper(_getMe)
+        .then(() => fetchWrapper(_uploadCars))
         .catch(() => redirect('/auth')),
     },
   ]
 }
 
+function _uploadCars() {
+  return fetch(`${serviceHost("informator")}/api/informator/cars/upload/state`, {
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  })
+}
+
+
 function _searchCars() {
-  return fetch(`${serviceHost("informator")}/api/informator/cars/search/car/`, {
+  return fetch(`${serviceHost("informator")}/api/informator/cars/search/car`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     }

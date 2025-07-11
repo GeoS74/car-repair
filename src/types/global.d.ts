@@ -242,4 +242,7 @@ interface ICar {
   stateNumber: string
 }
 
-type UploadExcelState = 'notUpload' | 'upload' | 'uploadComplete'
+type sendChildProcess = {
+  exitCode?: number
+  message?: string 
+}

@@ -12,7 +12,7 @@ import ButtonCancel from "../../../Form/ButtonCancel/ButtonCancel";
 import styles from "./styles.module.css";
 
 type Props = {
-  setIsUploadCars: React.Dispatch<React.SetStateAction<UploadExcelState>>
+  setIsUploadCars: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function UploadForm({ setIsUploadCars }: Props) {
@@ -96,12 +96,11 @@ function _onSubmit(
   event: React.FormEvent<HTMLFormElement>,
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>,
   setErrorResponse: React.Dispatch<React.SetStateAction<IErrorMessage | undefined>>,
-  setIsUploadCars: React.Dispatch<React.SetStateAction<UploadExcelState>>,
+  setIsUploadCars: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
 
   event.preventDefault();
   setDisabled(true);
-  setIsUploadCars('upload');
 
   const fd = new FormData(event.currentTarget);
 
@@ -130,8 +129,8 @@ function _onSubmit(
     })
     .catch(error => console.log(error.message))
     .finally(() => {
+      setIsUploadCars(true); // загрузка стартовала
       setDisabled(false);
-      setIsUploadCars('uploadComplete');
     });
 }
 
