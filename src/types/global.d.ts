@@ -242,3 +242,4 @@ interface ICar {
   stateNumber: string
 }
 
+type UploadExcelState = 'notUpload' | 'upload' | 'uploadComplete'

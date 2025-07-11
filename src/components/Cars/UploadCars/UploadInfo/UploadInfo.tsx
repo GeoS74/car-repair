@@ -1,19 +1,26 @@
-import { useState } from "react"
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 type Props = {
-  setIsUploadCars: React.Dispatch<React.SetStateAction<boolean>>
+  isUploadCars: UploadExcelState
 }
 
-export default function UploadInfo ({setIsUploadCars}: Props) {
+export default function UploadInfo({ isUploadCars }: Props) {
   const [countPoint, setCountPoint] = useState(0);
 
-  setTimeout(() => {
-    let newCount = 0
-    if(countPoint < 3) newCount = countPoint+1;
-    setCountPoint(newCount);
-  }, 800)
+  if (isUploadCars === 'upload') {
+    setTimeout(() => {
+      let newCount = 0
+      if (countPoint < 3) newCount = countPoint + 1;
+      setCountPoint(newCount);
+    }, 800)
+
+    return <>
+      {`Файл загружается, пожалуйста подождите ${new Array(countPoint).fill('.').join('')}`}
+    </>
+  }
 
   return <>
-    {`Файл загружается, пожалуйста подождите ${new Array(countPoint).fill('.').join('')}`}
+    {`Файл успешно загружен, ${<Link to="/cars/upload/excel">sdfsd</Link>}`}
   </>
 }
