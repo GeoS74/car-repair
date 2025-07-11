@@ -8,6 +8,11 @@
   --background-color: #1a1a1a;
 }
 
+/* принудительно отключить плавную прокрутку для window.scrollTo(0, 0); */
+html {
+  scroll-behavior: auto !important;
+}
+
 body {
   background: var(--background-color) !important;
   background-image: url("./img/ural_m.png") !important;

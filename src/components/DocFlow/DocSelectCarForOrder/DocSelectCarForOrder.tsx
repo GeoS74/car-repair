@@ -86,7 +86,6 @@ function _searchCar(
       if (response.ok) {
         const res = await response.json();
         setCars(res);
-        console.log(res)
         return;
       }
       throw new Error(`response status: ${response.status}`)

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import FileLinkedList from "./FileLinkedList/FileLinkedList";
@@ -15,6 +15,8 @@ type Props = {
 }
 
 export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
+  useEffect(() => window.scrollTo(0, 0)); // прокрутка страницы к верху
+
   const [doc, setDoc] = useState(docLoad);
   const [comments, setComments] = useState(commentsLoad);
 

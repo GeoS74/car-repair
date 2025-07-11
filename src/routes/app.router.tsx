@@ -21,13 +21,13 @@ const router = createBrowserRouter([
     loader: () => fetchWrapper(_getMe)
       .then(() => redirect("/docflow"))
       .catch(() => redirect('/auth')),
-      errorElement: < ErrorBoundary />,
+    errorElement: < ErrorBoundary />,
   },
   authRouter,
   userRouter,
   settingRouter, // only admin
   docFlowRouter,
   carsRouter // only admin
-])
+]);
 
 export default <RouterProvider router={router} />
