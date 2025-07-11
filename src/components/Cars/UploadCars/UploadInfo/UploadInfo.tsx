@@ -21,6 +21,6 @@ export default function UploadInfo({ isUploadCars }: Props) {
   }
 
   return <>
-    {`Файл успешно загружен, ${<Link to="/cars/upload/excel">sdfsd</Link>}`}
+    {`Файл успешно загружен, `} <Link to="/cars">перейти к списку автомобилей</Link>
   </>
 }
