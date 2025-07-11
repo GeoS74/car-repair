@@ -52,12 +52,14 @@ export default {
       path: "/docflow/create/doc",
       element: <CreateDoc />,
       loader: () => fetchWrapper(_getMe)
+        .then(() => null)
         .catch(() => redirect('/auth')),
     },
     {
       path: "/docflow/create/order",
       element: <CreateDoc tpl="order" />,
       loader: () => fetchWrapper(_getMe)
+        .then(() => null)
         .catch(() => redirect('/auth')),
     },
     {

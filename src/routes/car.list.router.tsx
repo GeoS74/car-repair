@@ -10,6 +10,7 @@ import Cars from "../components/Cars/Cars";
 import CarsList from "../components/Cars/CarsList/CarsList";
 import CarPage from "../components/Cars/CarPage/CarPage";
 import EditForm from "../components/Cars/EditForm/EditForm";
+import UploadCars from "../components/Cars/UploadCars/UploadCars";
 
 export default {
   path: "/cars",
@@ -19,7 +20,7 @@ export default {
       index: true,
       element: <CarsList />,
       loader: () => fetchWrapper(_searchCars)
-        .catch(() => redirect('/auth'))
+        .catch(() => redirect('/auth')),
     },
     {
       path: "/cars/:id",
@@ -32,12 +33,13 @@ export default {
           }
           return res;
         })
-        .catch(() => redirect('/auth'))
+        .catch(() => redirect('/auth')),
     },
     {
       path: "/cars/create/car",
       element: <EditForm />,
       loader: () => fetchWrapper(_getMe)
+        .then(() => null)
         .catch(() => redirect('/auth')),
     },
     {
@@ -51,7 +53,13 @@ export default {
           }
           return res;
         })
-        .catch(() => redirect('/auth'))
+        .catch(() => redirect('/auth')),
+    },
+    {
+      path: "/cars/upload/excel",
+      element: <UploadCars />,
+      loader: () => fetchWrapper(_getMe)
+        .catch(() => redirect('/auth')),
     },
   ]
 }

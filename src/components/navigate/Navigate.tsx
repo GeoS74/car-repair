@@ -43,47 +43,10 @@ export default function Navigate() {
                   </li>
                   : <></>}
 
-                {/* <li className="nav-item">
-                  <Link to="/catalog" className="nav-link">Каталог</Link>
-                </li> */}
-
-                {/* <li className="nav-item">
-                  <Link to="/catalog/download/price" className="nav-link">Прайс-лист</Link>
-                </li> */}
-
-                {/* {session.getMe()?.rank === 'admin' ?
-                  <li className="nav-item dropdown">
-                    <span className="nav-link dropdown-toggle" onClick={(event) => event.currentTarget.nextElementSibling?.classList.toggle("show")}>Прайс</span>
-                    <div className="dropdown-menu" onClick={(event) => event.currentTarget.classList.toggle("show")}>
-                      <Link to="/catalog/edit/brands" className="dropdown-item">Бренды</Link>
-                      <Link to="/catalog/edit/providers" className="dropdown-item">Поставщики</Link>
-                      <hr />
-                      <Link to="/catalog/edit/upload" className="dropdown-item">Загрузка прайса</Link>
-                    </div>
-                  </li>
-                  : <></>} */}
-
-                {/* {session.getMe()?.rank === 'admin' ?
-                  <li className="nav-item">
-                    <Link to="/newsLine" className="nav-link">Слайды</Link>
-                  </li>
-                  : <></>
-                } */}
-
-                {/* <li className="nav-item">
-                  <Link to="/about/contact" className="nav-link">Контакты</Link>
-                </li>
-
-                <li className="nav-item">
-                  <Link to="/about/company" className="nav-link">О компании</Link>
-                </li> */}
-
-
                 {session.getMe() ? <li className="nav-item">
                   <Link to="/user" className="nav-link">Кабинет</Link>
                 </li>
                   : <></>}
-
 
                 {session.getMe()?.rank === 'admin' ?
                   <li className="nav-item dropdown">
@@ -103,8 +66,12 @@ export default function Navigate() {
                 }
 
                 {session.getMe()?.rank === 'admin' ?
-                  <li className="nav-item">
-                    <Link to="/cars" className="nav-link">Автомобили</Link>
+                  <li className="nav-item dropdown">
+                    <span className="nav-link dropdown-toggle" onClick={(event) => event.currentTarget.nextElementSibling?.classList.toggle("show")}>Автомобили</span>
+                    <div className="dropdown-menu" onClick={(event) => event.currentTarget.classList.toggle("show")}>
+                      <Link to="/cars" className="nav-link">Список автомобилей</Link>
+                      <Link to="/cars/upload/excel" className="nav-link">Загрузка списка</Link>
+                    </div>
                   </li>
                   : <></>
                 }

@@ -1,0 +1,12 @@
+.root>h3 {
+  color: var(--color);
+}
+
+.root > p span {
+  color: var(--color);
+  cursor: pointer;
+}
+
+.root > p span:hover{
+  text-decoration: underline;
+}
