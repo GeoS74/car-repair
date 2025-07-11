@@ -1,12 +1,12 @@
 import { redirect, LoaderFunctionArgs } from "react-router-dom";
 
-import serviceHost from "../libs/service.host"
-import fetchWrapper from "../libs/fetch.wrapper"
-import tokenManager from "../libs/token.manager"
+import serviceHost from "../libs/service.host";
+import fetchWrapper from "../libs/fetch.wrapper";
+import tokenManager from "../libs/token.manager";
 import { responseNotIsArray } from "../middleware/response.validator";
-import session from "../libs/token.manager";
+import { _getMe } from "../libs/auth.user";
 
-import Cars from "../components/Cars/Cars"
+import Cars from "../components/Cars/Cars";
 import CarsList from "../components/Cars/CarsList/CarsList";
 import CarPage from "../components/Cars/CarPage/CarPage";
 import EditForm from "../components/Cars/EditForm/EditForm";
@@ -37,7 +37,8 @@ export default {
     {
       path: "/cars/create/car",
       element: <EditForm />,
-      loader: () => session.start(),
+      loader: () => fetchWrapper(_getMe)
+        .catch(() => redirect('/auth')),
     },
     {
       path: "/cars/edit/car/:id",

@@ -63,7 +63,7 @@ async function _user(res: Response) {
 function _createUser(name: string) {
   const fd = new FormData();
   fd.append('name', name);
-  
+
   return fetch(`${serviceHost("informator")}/api/informator/user/`, {
     method: 'POST',
     headers: {

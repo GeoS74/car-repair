@@ -37,8 +37,8 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
 
       <FileLinkedList files={doc.files} />
 
-      <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
       <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
+      <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
 
       <Author {...doc} />
     </div>

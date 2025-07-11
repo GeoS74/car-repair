@@ -1,15 +1,17 @@
 import { redirect } from "react-router-dom";
 
-import serviceHost from "../libs/service.host"
-import tokenManager from "../libs/token.manager"
-import fetchWrapper from "../libs/fetch.wrapper"
+import serviceHost from "../libs/service.host";
+import tokenManager from "../libs/token.manager";
+import fetchWrapper from "../libs/fetch.wrapper";
+import { responseNotIsArray } from "../middleware/response.validator";
 
-import Setting from "../components/Setting/Setting"
+import Setting from "../components/Setting/Setting";
 // import Search from "../components/catalog/Search/Search"
-import SimpleList from "../components/SimpleList/SimpleList"
-import AccessSetting from "../components/Setting/AccessSetting/AccessSetting"
-import BundleRole from "../components/Setting/BundleRole/BundleRole"
+import SimpleList from "../components/SimpleList/SimpleList";
+import AccessSetting from "../components/Setting/AccessSetting/AccessSetting";
+import BundleRole from "../components/Setting/BundleRole/BundleRole";
 import FrozenList from "../components/FrozenList/FrozenList";
+import { _getMe } from "../libs/auth.user";
 
 export default {
   path: "/setting",
@@ -43,13 +45,21 @@ export default {
     {
       path: "/setting/edit/actions",
       // element: <><></><></><></><SimpleList typeList="actions" /></>,
-      element: <><></><></><></><FrozenList title="Список действий"/></>,
-      loader: () => fetchWrapper(_getActions).catch(() => redirect('/auth'))
+      element: <><></><></><></><FrozenList title="Список действий" /></>,
+      loader: () => fetchWrapper(_getActions)
+        .then(responseNotIsArray)
+        .then(async res => {
+          const actions: ISimpleRow[] = await res.json();
+          return actions.filter(e => !['Согласовать', 'Ознакомиться'].includes(e.title));
+        })
+        .catch(() => redirect('/auth'))
     },
     {
       path: "/setting/edit/status",
-      element: <><></><></><></><></><FrozenList title="Список статусов"/></>,
-      loader: () => fetchWrapper(_getStatus).catch(() => redirect('/auth'))
+      element: <><></><></><></><></><FrozenList title="Список статусов" /></>,
+      loader: () => fetchWrapper(_getMe)
+        .then(() => fetchWrapper(_getStatus))
+        .catch(() => redirect('/auth'))
     },
     {
       path: "/setting/edit/access",
