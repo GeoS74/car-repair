@@ -25,9 +25,9 @@ const router = createBrowserRouter([
   },
   authRouter,
   userRouter,
-  settingRouter,
+  settingRouter, // only admin
   docFlowRouter,
-  carsRouter
+  carsRouter // only admin
 ])
 
 export default <RouterProvider router={router} />

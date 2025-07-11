@@ -30,17 +30,35 @@ export default {
     {
       path: "/setting/edit/roles",
       element: <SimpleList typeList="roles" />,
-      loader: () => fetchWrapper(_getRoles).catch(() => redirect('/auth'))
+      loader: () => fetchWrapper(_getRoles)
+        .then(responseNotIsArray)
+        .then(res => {
+          if (res.ok) return res;
+          throw new Error();
+        })
+        .catch(() => redirect('/auth'))
     },
     {
       path: "/setting/edit/directings",
       element: <><></><SimpleList typeList="directings" /></>,
-      loader: () => fetchWrapper(_getDirectings).catch(() => redirect('/auth'))
+      loader: () => fetchWrapper(_getDirectings)
+        .then(responseNotIsArray)
+        .then(res => {
+          if (res.ok) return res;
+          throw new Error();
+        })
+        .catch(() => redirect('/auth'))
     },
     {
       path: "/setting/edit/processes",
       element: <><></><></><SimpleList typeList="tasks" /></>,
-      loader: () => fetchWrapper(_getProcesses).catch(() => redirect('/auth'))
+      loader: () => fetchWrapper(_getProcesses)
+        .then(responseNotIsArray)
+        .then(res => {
+          if (res.ok) return res;
+          throw new Error();
+        })
+        .catch(() => redirect('/auth'))
     },
     {
       path: "/setting/edit/actions",
@@ -48,6 +66,10 @@ export default {
       element: <><></><></><></><FrozenList title="Список действий" /></>,
       loader: () => fetchWrapper(_getActions)
         .then(responseNotIsArray)
+        .then(res => {
+          if (res.ok) return res;
+          throw new Error();
+        })
         .then(async res => {
           const actions: ISimpleRow[] = await res.json();
           return actions.filter(e => !['Согласовать', 'Ознакомиться'].includes(e.title));
@@ -59,6 +81,11 @@ export default {
       element: <><></><></><></><></><FrozenList title="Список статусов" /></>,
       loader: () => fetchWrapper(_getMe)
         .then(() => fetchWrapper(_getStatus))
+        .then(responseNotIsArray)
+        .then(res => {
+          if (res.ok) return res;
+          throw new Error();
+        })
         .catch(() => redirect('/auth'))
     },
     {
@@ -67,7 +94,10 @@ export default {
       loader: () => fetchWrapper([_getRoles, _getDirectings, _getProcesses, _getActions, _getAccessSettings])
         .then(response => {
           if (Array.isArray(response)) {
-            return Promise.all(response.map(async r => await r.json()))
+            return Promise.all(response.map(async r => {
+              if (r.ok) return await r.json();
+              throw new Error();
+            }))
           }
         })
         .catch(() => redirect('/auth'))
@@ -78,7 +108,10 @@ export default {
       loader: () => fetchWrapper([_getUsers, _getRoles])
         .then(response => {
           if (Array.isArray(response)) {
-            return Promise.all(response.map(async r => await r.json()))
+            return Promise.all(response.map(async r => {
+              if (r.ok) return await r.json();
+              throw new Error();
+            }))
           }
         })
         .catch(() => redirect('/auth'))
