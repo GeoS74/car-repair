@@ -8,7 +8,9 @@
   --background-color: #1a1a1a;
 }
 
-/* принудительно отключить плавную прокрутку для window.scrollTo(0, 0); */
+/* принудительно отключить плавную прокрутку для window.scrollTo(0, 0); 
+в файле index.css это правило установлено как scroll-behavior:smooth
+*/
 html {
   scroll-behavior: auto !important;
 }
