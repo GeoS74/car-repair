@@ -7,7 +7,6 @@ import { responseNotIsArray } from "../../../../middleware/response.validator";
 
 
 export default function UploadInfo() {
-  // const [countPoint, setCountPoint] = useState(0);
   const [uploadState, setUploadState] = useState<{message: string}>();
 
   useEffect(() => { // для возможных утечек памяти ;-)
@@ -26,8 +25,31 @@ export default function UploadInfo() {
   }
 
   return  <div>
+    <div>
     {`Файл загружается, пожалуйста подождите: ${uploadState?.message || ''}`}
+    </div>
+    <button
+      type="button"
+      className="btn btn-outline-warning mt-4"
+      onClick={() =>_stopProcess(setUploadState)}>Остановить загрузку</button>
   </div>
+}
+
+function _stopProcess(
+  setUploadState: React.Dispatch<React.SetStateAction<{
+      message: string;
+  } | undefined>>
+) {
+  if(!confirm('Вы уверены, что хотите остановить загрузку файла?')) {
+    return;
+  }
+
+  fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/cars/upload/kill`, {
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  }))
+  .finally(() => setUploadState({message: 'загрузка файла завершена'}));
 }
 
 function _getUploadState(

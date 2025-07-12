@@ -58,8 +58,7 @@ export default {
     {
       path: "/cars/upload/excel",
       element: <UploadCars />,
-      loader: () => fetchWrapper(_getMe)
-        .then(() => fetchWrapper(_uploadCars))
+      loader: () => fetchWrapper(_uploadCars)
         .catch(() => redirect('/auth')),
     },
   ]
