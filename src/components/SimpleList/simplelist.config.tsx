@@ -41,4 +41,11 @@ export const simpleListConfig: ISimpleListConf  =  {
         placeholder: "Действие",
         api: "/api/informator/action",
       },
+      companies: {
+        serviceName: 'informator',
+        title: "Список компаний",
+        placeholderSearch: "поиск компаний",
+        placeholder: "Компания",
+        api: "/api/informator/company",
+      },
 }

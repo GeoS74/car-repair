@@ -11,6 +11,7 @@ import userRouter from "./user.router";
 import settingRouter from "./setting.router";
 import docFlowRouter from "./docflow.router";
 import carsRouter from "./car.list.router";
+import usersSettingRouter from "./users.setting.router";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Main from "../components/Main/Main";
 
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
   userRouter,
   settingRouter, // only admin
   docFlowRouter,
-  carsRouter // only admin
+  carsRouter, // only admin
+  usersSettingRouter // only admin
 ]);
 
 export default <RouterProvider router={router} />

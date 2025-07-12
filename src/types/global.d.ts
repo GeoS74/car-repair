@@ -164,7 +164,8 @@ interface ISimpleListConf {
   roles: IListConf,
   directings: IListConf,
   tasks: IListConf,
-  actions: IListConf
+  actions: IListConf,
+  companies: IListConf
 }
 
 interface IListConf {
