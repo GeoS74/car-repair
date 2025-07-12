@@ -241,8 +241,3 @@ interface ICar {
   place: string
   stateNumber: string
 }
-
-type sendChildProcess = {
-  exitCode?: number
-  message?: string 
-}

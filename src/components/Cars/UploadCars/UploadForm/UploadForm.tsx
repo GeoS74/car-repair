@@ -12,10 +12,10 @@ import ButtonCancel from "../../../Form/ButtonCancel/ButtonCancel";
 import styles from "./styles.module.css";
 
 type Props = {
-  setIsUploadCars: React.Dispatch<React.SetStateAction<boolean>>
+  setUploadCarsComplete: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function UploadForm({ setIsUploadCars }: Props) {
+export default function UploadForm({ setUploadCarsComplete }: Props) {
 
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorResponse] = useState<IErrorMessage>();
@@ -25,7 +25,7 @@ export default function UploadForm({ setIsUploadCars }: Props) {
       event,
       setDisabled,
       setErrorResponse,
-      setIsUploadCars,
+      setUploadCarsComplete,
     )}
   >
     <fieldset disabled={disabled} className="form-group">
@@ -96,7 +96,7 @@ function _onSubmit(
   event: React.FormEvent<HTMLFormElement>,
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>,
   setErrorResponse: React.Dispatch<React.SetStateAction<IErrorMessage | undefined>>,
-  setIsUploadCars: React.Dispatch<React.SetStateAction<boolean>>,
+  setUploadCarsComplete: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
 
   event.preventDefault();
@@ -120,7 +120,11 @@ function _onSubmit(
   }))
     .then(responseNotIsArray)
     .then(async response => {
-      if (response.status === 400) {
+      if (response.ok) {
+        setUploadCarsComplete(false); // загрузка стартовала
+        return;
+      }
+      else if (response.status === 400) {
         const res = await response.json()
         setErrorResponse(_getErrorResponse(res.error))
         return;
@@ -129,13 +133,11 @@ function _onSubmit(
     })
     .catch(error => console.log(error.message))
     .finally(() => {
-      setIsUploadCars(true); // загрузка стартовала
       setDisabled(false);
     });
 }
 
 function _getErrorResponse(error: string): IErrorMessage {
-  console.log(error);
   switch (error) {
     case "carModelField is empty":
       return { field: "carModelField", message: "Столбец не указан" }

@@ -9,17 +9,15 @@ import styles from "./styles.module.css";
 export default function UploadCars() {
   session.subscribe('UploadCars');
 
-  // const state = useLoaderData() as {message: string};
+  const state = useLoaderData() as {message: string};
 
-  const [isUploadCars, setIsUploadCars] = useState(false);
-
-  // console.log(state.message)
+  const [uploadCarsComplete, setUploadCarsComplete] = useState(state.message === 'загрузка файла завершена');
 
   return <div className={styles.root} >
     <h3 className="mb-4">Загрузка списка автомобилей из Excel</h3>
 
-    {!isUploadCars ?
-      <UploadForm setIsUploadCars={setIsUploadCars} /> :
+    {uploadCarsComplete ?
+      <UploadForm setUploadCarsComplete={setUploadCarsComplete} /> :
       <UploadInfo />
     }
   </div>
