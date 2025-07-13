@@ -4,7 +4,6 @@ import serviceHost from "../libs/service.host";
 import fetchWrapper from "../libs/fetch.wrapper";
 import tokenManager from "../libs/token.manager";
 import { responseNotIsArray } from "../middleware/response.validator";
-import { _getMe } from "../libs/auth.user";
 
 import UsersManagement from "../components/UsersManagement/UsersManagement";
 import UsersList from "../components/UsersManagement/UsersList/UsersList";
@@ -37,21 +36,36 @@ export default {
     {
       path: "/users/management/create/user",
       element: <EditForm />,
-      loader: () => fetchWrapper(_getMe)
-        .then(() => null)
+      loader: () => fetchWrapper([_getCompanies, _getRoles])
+        .then(response => {
+          if (Array.isArray(response)) {
+            return Promise.all(response.map(async r => {
+              if (r.ok) return await r.json();
+              throw new Error();
+            }))
+          }
+        })
+        .then(response => {
+          if(Array.isArray(response))
+            return [null, ...response];
+        })
         .catch(() => redirect('/auth')),
     },
     {
       path: "/users/management/edit/user/:id",
       element: <EditForm />,
-      loader: ({ params }: LoaderFunctionArgs) => fetchWrapper(() => _getUser(params.id))
-        .then(responseNotIsArray)
-        .then(res => {
-          if (res.status === 404) {
-            return redirect('/users/management')
-          }
-          return res;
-        })
+      loader: ({ params }: LoaderFunctionArgs) => fetchWrapper([() => _getUser(params.id), _getCompanies, _getRoles])
+      .then(response => {
+        if (Array.isArray(response)) {
+          return Promise.all(response.map(async r => {
+            if (r.ok) return await r.json();
+            else if (r.status === 404) {
+              return redirect('/users/management')
+            }
+            throw new Error();
+          }))
+        }
+      })
         .catch(() => redirect('/auth')),
     },
   ]
@@ -67,6 +81,22 @@ function _searchUsers() {
 
 function _getUser(uid?: string) {
   return fetch(`${serviceHost("informator")}/api/informator/user/management/${uid}`, {
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  })
+}
+
+function _getCompanies() {
+  return fetch(`${serviceHost("informator")}/api/informator/company`, {
+    headers: {
+      'Authorization': `Bearer ${tokenManager.getAccess()}`
+    }
+  })
+}
+
+function _getRoles() {
+  return fetch(`${serviceHost("informator")}/api/informator/role`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     }

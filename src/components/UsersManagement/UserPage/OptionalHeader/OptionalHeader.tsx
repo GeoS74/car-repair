@@ -1,15 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import session from "../../../../libs/token.manager"
-import tokenManager from "../../../../libs/token.manager"
-import fetchWrapper from "../../../../libs/fetch.wrapper";
-import serviceHost from "../../../../libs/service.host";
-import { responseNotIsArray } from "../../../../middleware/response.validator";
 
 import { ReactComponent as IconEdit } from "./icons/wrench.svg";
-import { ReactComponent as IconDelete } from "./icons/trash.svg";
+// import { ReactComponent as IconDelete } from "./icons/trash.svg";
 import styles from "./styles.module.css"
 
-export default function OptionalHeader({ uid, createdAt }: IUser) {
+export default function OptionalHeader({ uid }: IUser) {
   const navigate = useNavigate();
 
   return <div className={styles.root}>

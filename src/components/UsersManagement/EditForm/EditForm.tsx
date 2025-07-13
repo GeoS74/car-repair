@@ -12,7 +12,7 @@ import ButtonSubmit from "../../Form/ButtonSubmit/ButtonSubmit";
 import styles from "./styles.module.css";
 
 export default function EditForm() {
-  const user = useLoaderData() as IUser;
+  const [user, companies, roles] = useLoaderData() as [IUser, ISimpleRow[], ISimpleRow[]];
 
 
   const [disabled, setDisabled] = useState(false);
