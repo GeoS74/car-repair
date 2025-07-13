@@ -20,6 +20,7 @@ export default function BundleRole() {
 
       <h5>Пользователь: {user.name}</h5>
       <p>email: {user.email}</p>
+      <p>Компания: {user.company?.title || 'не указана'}</p>
       <RolePane currentUser={user} roles={roles} />
     </div>
     )}

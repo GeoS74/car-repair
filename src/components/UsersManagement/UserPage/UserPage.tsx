@@ -1,11 +1,13 @@
 import { useLoaderData } from "react-router-dom";
 
+import session from "../../../libs/token.manager";
 import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import Avatar from "./Avatar/Avatar";
-import styles from "./styles.module.css"
-
+import styles from "./styles.module.css";
 
 export default function UserPage() {
+  session.subscribe('UserPage');
+
   const user = useLoaderData() as IUser;
 
   return <div>

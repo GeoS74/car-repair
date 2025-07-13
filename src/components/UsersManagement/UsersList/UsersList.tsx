@@ -17,8 +17,6 @@ export default function UsersList() {
   return <div className={styles.root} >
     {/* <h3 className="mb-4">Список пользователей</h3> */}
 
-     
-
     <UserSearchForm
       setSearchResult={setUsers}
       setShowNextButton={setShowNextButton} 

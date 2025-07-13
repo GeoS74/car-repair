@@ -24,7 +24,7 @@ export default function Navigate() {
       <div>
         <nav className={classNames(styles.root, `navbar navbar-expand-lg navbar-${theme === 'light' ? 'primary' : 'dark'}`)}>
           <div className="container-fluid">
-            <Link className={classNames("navbar-brand")} to="/docflow"><h1>БОВИД</h1></Link>
+            <Link className={classNames("navbar-brand")} to="/docflow" ><h1>БОВИД</h1></Link>
 
             <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"
               onClick={_toggleMenu}
@@ -69,8 +69,8 @@ export default function Navigate() {
                   <li className="nav-item dropdown">
                     <span className="nav-link dropdown-toggle" onClick={(event) => event.currentTarget.nextElementSibling?.classList.toggle("show")}>Автомобили</span>
                     <div className="dropdown-menu" onClick={(event) => event.currentTarget.classList.toggle("show")}>
-                      <Link to="/cars" className="nav-link">Список автомобилей</Link>
-                      <Link to="/cars/upload/excel" className="nav-link">Загрузка списка</Link>
+                      <Link to="/cars" className="dropdown-item">Список автомобилей</Link>
+                      <Link to="/cars/upload/excel" className="dropdown-item">Загрузка списка</Link>
                     </div>
                   </li>
                   : <></>
@@ -80,8 +80,8 @@ export default function Navigate() {
                   <li className="nav-item dropdown">
                     <span className="nav-link dropdown-toggle" onClick={(event) => event.currentTarget.nextElementSibling?.classList.toggle("show")}>Пользователи</span>
                     <div className="dropdown-menu" onClick={(event) => event.currentTarget.classList.toggle("show")}>
-                      <Link to="/users/management" className="nav-link">Пользователи системы</Link>
-                      <Link to="/users/setting/company" className="nav-link">Список компаний</Link>
+                      <Link to="/users/management" className="dropdown-item">Пользователи системы</Link>
+                      <Link to="/users/setting/company" className="dropdown-item">Список компаний</Link>
                     </div>
                   </li>
                   : <></>

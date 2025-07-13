@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, NavigateFunction, useLoaderData } from "react-router-dom";
 
 import tokenManager from "../../../libs/token.manager";
+import session from "../../../libs/token.manager";
 import serviceHost from "../../../libs/service.host";
 import fetchWrapper from "../../../libs/fetch.wrapper";
 import { responseNotIsArray } from "../../../middleware/response.validator";
@@ -13,6 +14,8 @@ import ButtonSubmit from "../../Form/ButtonSubmit/ButtonSubmit";
 import styles from "./styles.module.css";
 
 export default function EditForm() {
+  session.subscribe('EditForm');
+  
   const [user, companies] = useLoaderData() as [IUser, ISimpleRow[]];
 
   const [disabled, setDisabled] = useState(false);

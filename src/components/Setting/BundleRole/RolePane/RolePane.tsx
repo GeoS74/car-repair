@@ -19,7 +19,7 @@ export default function RolePane({ currentUser, roles }: Props) {
     {editMode ?
       <EditRoleForm setEditMode={setEditMode} roles={roles} setUser={setUser} user={user} /> :
 
-      <p className="mt-4">Роль: {user.roles[0]?.title || "не назначена"}
+      <p>Роль: {user.roles[0]?.title || "не назначена"}
 
         <span className="text-muted" hidden={true}
           onClick={() => setEditMode(true)}>назначить роль</span>
