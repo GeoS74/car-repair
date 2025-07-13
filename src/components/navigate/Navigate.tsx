@@ -80,6 +80,7 @@ export default function Navigate() {
                   <li className="nav-item dropdown">
                     <span className="nav-link dropdown-toggle" onClick={(event) => event.currentTarget.nextElementSibling?.classList.toggle("show")}>Пользователи</span>
                     <div className="dropdown-menu" onClick={(event) => event.currentTarget.classList.toggle("show")}>
+                      <Link to="/users/management" className="nav-link">Пользователи системы</Link>
                       <Link to="/users/setting/company" className="nav-link">Список компаний</Link>
                     </div>
                   </li>

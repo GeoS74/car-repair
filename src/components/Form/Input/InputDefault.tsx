@@ -9,9 +9,10 @@ type Props = {
   placeholder?: string
   errorMessage?: IErrorMessage
   disabled?: boolean
+  readOnly?: boolean
 }
 
-export default function InputDefault({ prefix, val, label, placeholder, errorMessage, disabled = false }: Props) {
+export default function InputDefault({ prefix, val, label, placeholder, errorMessage, disabled = false, readOnly = false }: Props) {
   return <>
     <div className={classNames(styles.root, "mt-4")}>
       <label htmlFor={`${prefix}Input`} className="form-label mt-1">{label || "Название"}</label>
@@ -22,7 +23,9 @@ export default function InputDefault({ prefix, val, label, placeholder, errorMes
         name={`${prefix}`}
         className="form-control"
         placeholder={placeholder || label || "Введите название"} 
-        disabled={disabled}/>
+        disabled={disabled}
+        readOnly={readOnly}
+        />
     </div>
     {errorMessage?.field === prefix ? <ErrorMessage errorMessage={errorMessage.message} /> : <></>}
   </>

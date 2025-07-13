@@ -31,7 +31,7 @@ export default function CreateDoc({ tpl }: Props) {
 
   if(typeDoc?.directing && typeDoc.task) {
     
-    if(typeDoc.task.title === 'Заказ-наряд') {
+    if(typeDoc.task.title.toLowerCase() === 'Заказ-наряд'.toLowerCase()) {
       return <WrapEditForm tpl="order" typeDoc={typeDoc}/>
     }
     if(typeDoc.task.title === 'Счёт') {

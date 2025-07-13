@@ -4,7 +4,7 @@ import DocRowOrder from "./DocRowOrder";
 
 export default function DocRow({ ...doc }: IDoc) {
 
-  if(doc.task.title === 'Заказ-наряд') {
+  if(doc.task.title.toLowerCase() === 'Заказ-наряд'.toLowerCase()) {
     return <DocRowOrder {...doc} />
   }
 

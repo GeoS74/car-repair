@@ -10,7 +10,7 @@ export default function DocPage() {
 
   const [doc, comments] = useLoaderData() as [IDoc, IComment[]];
 
-  if(doc.task.title === 'Заказ-наряд') {
+  if(doc.task.title.toLowerCase() === 'Заказ-наряд'.toLowerCase()) {
     return <DocPageOrder docLoad={doc} commentsLoad={comments} />
   }
 
