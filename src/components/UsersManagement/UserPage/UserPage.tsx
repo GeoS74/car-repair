@@ -18,6 +18,7 @@ export default function UserPage() {
 
       <p>email: {user.email}</p>
       <p>Имя: {user.name}</p>
+      <p>Компания: {user?.company?.title || 'не указана'}</p>
       <p>Роль: {user?.roles[0]?.title || 'не указана'}</p>
     </div>
   </div>

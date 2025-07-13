@@ -36,25 +36,21 @@ export default {
     {
       path: "/users/management/create/user",
       element: <EditForm />,
-      loader: () => fetchWrapper([_getCompanies, _getRoles])
-        .then(response => {
-          if (Array.isArray(response)) {
-            return Promise.all(response.map(async r => {
-              if (r.ok) return await r.json();
-              throw new Error();
-            }))
+      loader: () => fetchWrapper(_getCompanies)
+        .then(responseNotIsArray)
+        .then(async response => {
+          if(response.ok) {
+            return await response.json();
           }
+          throw new Error();
         })
-        .then(response => {
-          if(Array.isArray(response))
-            return [null, ...response];
-        })
+        .then(response => [null, response])
         .catch(() => redirect('/auth')),
     },
     {
       path: "/users/management/edit/user/:id",
       element: <EditForm />,
-      loader: ({ params }: LoaderFunctionArgs) => fetchWrapper([() => _getUser(params.id), _getCompanies, _getRoles])
+      loader: ({ params }: LoaderFunctionArgs) => fetchWrapper([() => _getUser(params.id), _getCompanies])
       .then(response => {
         if (Array.isArray(response)) {
           return Promise.all(response.map(async r => {
@@ -89,14 +85,6 @@ function _getUser(uid?: string) {
 
 function _getCompanies() {
   return fetch(`${serviceHost("informator")}/api/informator/company`, {
-    headers: {
-      'Authorization': `Bearer ${tokenManager.getAccess()}`
-    }
-  })
-}
-
-function _getRoles() {
-  return fetch(`${serviceHost("informator")}/api/informator/role`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     }

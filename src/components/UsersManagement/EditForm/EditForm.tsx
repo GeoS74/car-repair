@@ -7,13 +7,13 @@ import fetchWrapper from "../../../libs/fetch.wrapper";
 import { responseNotIsArray } from "../../../middleware/response.validator";
 
 import InputDefault from "../../Form/Input/InputDefault";
+import SelectDefault from "../../Form/Select/SelectDefault";
 import ButtonCancel from "../../Form/ButtonCancel/ButtonCancel";
 import ButtonSubmit from "../../Form/ButtonSubmit/ButtonSubmit";
 import styles from "./styles.module.css";
 
 export default function EditForm() {
-  const [user, companies, roles] = useLoaderData() as [IUser, ISimpleRow[], ISimpleRow[]];
-
+  const [user, companies] = useLoaderData() as [IUser, ISimpleRow[]];
 
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorResponse] = useState<IErrorMessage>();
@@ -54,6 +54,13 @@ export default function EditForm() {
         label="Имя пользователя"
         val={user?.name}
         errorMessage={errorMessage} />
+
+      <SelectDefault
+        prefix="company"
+        label="Компания"
+        options={companies}
+        val={user?.company?.id+""}
+      />
 
       <ButtonSubmit
         val={!user ? 'Создать пользователя' : 'Изменить данные'}

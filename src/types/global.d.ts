@@ -185,6 +185,7 @@ interface IUser {
   photo: string
   createdAt: string
   status?: string
+  company?: ISimpleRow
 }
 
 type DocType = {

@@ -28,7 +28,6 @@ export default function Accordion({ user, setUser, editMode, setEditMode }: Prop
         <div className="accordion-collapse">
           <div className="accordion-body">
             <p>email: {user.email}</p>
-            <p>ранг: {user.rank}</p>
             <p>Ф.И.О.: {editMode ?
               <input type="text"
                 autoFocus
@@ -36,6 +35,9 @@ export default function Accordion({ user, setUser, editMode, setEditMode }: Prop
                 name="name" defaultValue={user.name || ""} /> :
               (user.name || "укажите Ф.И.О.")}
             </p>
+            <p>компания: {user.company?.title || 'не указана'}</p>
+            <p>роль: {user?.roles[0]?.title || 'не присвоена'}</p>
+            {/* <p>ранг: {user.rank}</p> */}
             <p>регистрация: {user.createdAt}</p>
           </div>
         </div>
