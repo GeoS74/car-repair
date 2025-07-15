@@ -7,12 +7,14 @@ type Props = {
   docId: string,
   comments: IComment[],
   addComment: (comment: IComment) => void
+  setFiles: (files: IStaticFile[]) => void
+  linkedFiles: IStaticFile[]
  }
 
-export default function Comments({ docId, comments, addComment }: Props){
+export default function Comments({ docId, comments, addComment, setFiles, linkedFiles }: Props){
   return <div className={classNames(styles.root, "mt-4")}>
-      <EditFormComments docId={docId} addComment={addComment} />
+      <EditFormComments docId={docId} addComment={addComment} setFiles={setFiles} />
 
-      <CommentsList comments={comments} />
+      <CommentsList comments={comments} linkedFiles={linkedFiles} />
     </div>
 }

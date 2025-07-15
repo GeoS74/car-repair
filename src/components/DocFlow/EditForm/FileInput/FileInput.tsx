@@ -20,9 +20,9 @@ export default function FileInput({ errorMessage, setFileList }: Props) {
     onDragOver={event => event.preventDefault()}
   >
 
-    <p className="mt-4">
-      <UploadIcon width="50" height="50" />
-      <small>Добавить файл</small></p>
+    <p className="mt-3">
+      <UploadIcon width="25" height="25" />
+      <small>Прикрепить файл</small></p>
 
     <input type="file" onChange={event => _change(event, setFileList)} hidden />
     {errorMessage?.field === "file" ? <ErrorMessage errorMessage={errorMessage.message} /> : <></>}

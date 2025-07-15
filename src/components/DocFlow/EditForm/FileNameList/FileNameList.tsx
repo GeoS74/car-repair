@@ -10,7 +10,7 @@ type Props = {
 
 export default function FileInput({ fileList, setFileList, errorMessage }: Props) {
   return <div className={classNames("mt-4", styles.root)}>
-    {fileList.length ? <><legend>Файлы:</legend><hr></hr></> : <></>}
+    {fileList.length ? <><p>файлы:</p><hr/></> : <></>}
 
     <ul>
       {fileList.map((f, i) => (

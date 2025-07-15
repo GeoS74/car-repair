@@ -1,0 +1,19 @@
+.root {
+  /* display: flex; */
+}
+
+.link  span{
+  text-decoration:line-through;
+}
+
+.link  svg{
+  margin-right: 15px;
+}
+
+.link a{
+  text-decoration: none;
+}
+.link:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

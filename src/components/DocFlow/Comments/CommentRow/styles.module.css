@@ -1,17 +1,14 @@
 .root {
   border: 1px solid var(--color);
   padding: 0 25px;
-}
-
-.root:hover{
-  box-shadow: 2px 2px 5px 1px grey;
-}
-
-.root{
   display: flex;
   flex-flow: row wrap;
   align-items: baseline;
   /* align-content: start; */
+}
+
+.root:hover{
+  box-shadow: 2px 2px 5px 1px grey;
 }
 
 .root>div:nth-child(1) {

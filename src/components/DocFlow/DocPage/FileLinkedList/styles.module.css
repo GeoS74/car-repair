@@ -1,0 +1,15 @@
+.root {
+  padding-left: 25px;
+}
+
+.link  svg{
+  margin-right: 15px;
+}
+
+.link a{
+  text-decoration: none;
+}
+.link:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

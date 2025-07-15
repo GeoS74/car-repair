@@ -8,19 +8,27 @@
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended"
     ],
-    "overrides": [
-    ],
+    "overrides": [],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     },
     "plugins": [
         "react",
         "@typescript-eslint"
     ],
     "rules": {
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off"
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
     }
 }

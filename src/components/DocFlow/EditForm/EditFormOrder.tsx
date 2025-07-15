@@ -30,9 +30,9 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
   const [disabled, setDisabled] = useState(false)
   const [errorMessage, setErrorResponse] = useState<IErrorMessage>();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [fileList, setFileList] = useState<FileList[]>([])
+  const [fileList, setFileList] = useState<FileList[]>([]);
 
   return <form className={styles.root}
     onSubmit={event => _onSubmit(

@@ -4,10 +4,10 @@ import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import FileLinkedList from "./FileLinkedList/FileLinkedList";
 import Description from "./Description/Description";
 import Author from "./Author/Author";
-import styles from "./styles.module.css";
 import Status from "./Status/Status";
 import ChangeStatusButton from "./ChangeStatusButton/ChangeStatusButton";
 import Comments from "../Comments/Comments";
+import styles from "./styles.module.css";
 
 type Props = {
   docLoad: IDoc,
@@ -20,7 +20,9 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
   const [doc, setDoc] = useState(docLoad);
   const [comments, setComments] = useState(commentsLoad);
 
-  return <>
+  return <div>
+    <h3 className="mb-4">{doc.task.title || ""}</h3>
+
     <div className={styles.root}>
 
       <OptionalHeader {...doc} />
@@ -45,6 +47,12 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
       <Author {...doc} />
     </div>
 
-    <Comments docId={doc.id} comments={comments} addComment={(comment: IComment) => setComments([comment, ...comments])} />
-  </>
+    <Comments
+      docId={doc.id}
+      comments={comments}
+      addComment={(comment: IComment) => setComments([comment, ...comments])}
+      setFiles={(files: IStaticFile[]) => setDoc({ ...doc, files: [...doc.files, ...files] })}
+      linkedFiles={doc.files}
+    />
+  </div>
 }
