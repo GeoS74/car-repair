@@ -7,24 +7,20 @@ import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import classNames from "classnames";
 
 type Props = {
-  formMode: AuthFormMode,
-  setFormMode: React.Dispatch<React.SetStateAction<AuthFormMode>>,
   errorMessage: IErrorMessage | undefined
 }
 
-export const Password = ({ formMode, setFormMode, errorMessage }: Props) => {
+export const Password = ({ errorMessage }: Props) => {
   const [visiblePassword, setVisiblePassword] = useState(false);
 
-  return formMode === "forgot" ?
-    <></> :
-    <div className={classNames(styles.root, "form-group")}>
+  return <div className={classNames(styles.root, "form-group")}>
 
-      <LabelForgot setFormMode={setFormMode} />
+    <LabelForgot/>
 
-      <input type={visiblePassword ? "text" : "password"} id="password" name="password" className="form-control" placeholder="password" />
+    <input type={visiblePassword ? "text" : "password"} id="password" name="password" className="form-control" placeholder="password" />
 
-      <Eye visiblePassword={visiblePassword} setVisiblePassword={setVisiblePassword} />
+    <Eye visiblePassword={visiblePassword} setVisiblePassword={setVisiblePassword} />
 
-      {errorMessage?.field === "password" ? <ErrorMessage errorMessage={errorMessage.message} /> : <></>}
-    </div>
+    {errorMessage?.field === "password" ? <ErrorMessage errorMessage={errorMessage.message} /> : <></>}
+  </div>
 };

@@ -100,6 +100,13 @@ export default {
             }))
           }
         })
+        .then(res => {
+          if(Array.isArray(res)) {
+            const actions: ISimpleRow[] = res[3];
+            res[3] = actions.filter(e => !['Согласовать', 'Ознакомиться'].includes(e.title));
+            return res;
+          }
+        })
         .catch(() => redirect('/auth'))
     },
     {

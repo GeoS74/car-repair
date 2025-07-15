@@ -6,7 +6,9 @@ import tokenManager from "../../libs/token.manager"
 
 import { Email } from "./Email/Email";
 import { Password } from "./Password/Password";
+import { YourName } from "./YourName/YourName";
 import { Button } from "./Button/Button";
+import { Footer } from "./Footer/Footer";
 import styles from "./styles.module.css"
 
 export const AuthForm = () => {
@@ -26,9 +28,13 @@ export const AuthForm = () => {
       <fieldset disabled={disabled}>
         <Email errorMessage={errorMessage} />
 
-        <Password errorMessage={errorMessage} />
+        <Password formMode={formMode} setFormMode={setFormMode} errorMessage={errorMessage} />
+
+        <YourName formMode={formMode} errorMessage={errorMessage} />
 
         <Button formMode={formMode} />
+
+        <Footer formMode={formMode} setFormMode={setFormMode} />
       </fieldset>
 
     </form>
@@ -47,14 +53,20 @@ function _query(
   setDisabled(true)
 
   fetch(`${serviceHost("mauth")}/api/mauth/${formMode}`, {
-    method: `POST`,
+    method: formMode === "forgot" ? `PATCH` : `POST`,
     body: new FormData(event.currentTarget),
   }).then(async (req) => {
     if (req.ok) {
 
-      const result: IAuthResponse = await req.json()
-      _updateTokens(result)
-      navigate('/docflow')
+      if (formMode === "signin") {
+        const result: IAuthResponse = await req.json()
+        _updateTokens(result)
+        navigate('/user')
+        return;
+      }
+
+      setFormMode("signin");
+      setErrorResponse(undefined);
       return;
     }
     else if (req.status === 400) {
