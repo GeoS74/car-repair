@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom"
-import Navigate from "../navigate/Navigate"
-import Footer from "../Footer/Footer"
-import styles from "./styles.module.css"
+import { Link } from "react-router-dom";
+import Navigate from "../navigate/Navigate";
+import styles from "./styles.module.css";
 
 export default function ErrorBoundary() {
   return <>
@@ -12,6 +11,5 @@ export default function ErrorBoundary() {
       <p>Вы запросили страницу, которой не существует.</p>
       <Link to="/">Перейти на главную</Link>
     </div>
-    <Footer />
   </>
 }
