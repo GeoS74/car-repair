@@ -70,7 +70,7 @@ function _updateAccessSetting(
     .then(responseNotIsArray)
     .then(async (response) => {
       if (response.ok) {
-        setModePopup("success")
+        setModePopup("success");
         return;
       }
 
@@ -78,7 +78,7 @@ function _updateAccessSetting(
     })
     .catch(error => {
       console.log(error.message)
-      setModePopup("danger")
+      setModePopup("danger");
     })
     .finally(() => setDisabled(false));
 }

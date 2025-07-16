@@ -80,7 +80,7 @@ function _createUser(
   setErrorResponse: React.Dispatch<React.SetStateAction<IErrorMessage | undefined>>,
   navigate: NavigateFunction,
 ) {
-  return fetchWrapper(() => fetch(`${serviceHost("mauth")}/api/mauth/signup`, {
+  return fetchWrapper(() => fetch(`${serviceHost("mauth")}/api/mauth/admin/user/signup`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
@@ -166,8 +166,6 @@ function _onSubmit(
   setDisabled(true);
 
   const fd = new FormData(event.currentTarget);
-
-  console.log(fd)
 
   if (!user) {
     return _createUser(fd, setDisabled, setErrorResponse, navigate);

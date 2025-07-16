@@ -6,17 +6,20 @@ import classNames from "classnames";
 type Props = {
   mode: PopupMode
   message: string
+  handlerClick?: () => void
 }
 
-export default function Popup({ mode, message }: Props) {
+export default function Popup({ mode, message, handlerClick }: Props) {
   const [popupMode, setPopupMode] = useState<PopupMode>(mode);
 
   if (!popupMode) {
     return <></>
   }
 
-  return <div className={classNames(styles.root, styles.layer)}>
-    
+  return <div className={classNames(styles.root, styles.layer)} onClick={() => {
+    if(handlerClick) handlerClick();
+  }}>
+
     <div className={classNames(styles.layer, styles.fon)} onClick={() => setPopupMode(undefined)}></div>
 
     <div className={classNames('alert alert-dismissible', `alert-${popupMode}`)}>

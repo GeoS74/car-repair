@@ -9,6 +9,7 @@ import UsersManagement from "../components/UsersManagement/UsersManagement";
 import UsersList from "../components/UsersManagement/UsersList/UsersList";
 import UserPage from "../components/UsersManagement/UserPage/UserPage";
 import EditForm from "../components/UsersManagement/EditForm/EditForm";
+import ChangePasswordForm from "../components/UsersManagement/EditForm/ChangePasswordForm";
 
 export default {
   path: "/users/management",
@@ -39,7 +40,7 @@ export default {
       loader: () => fetchWrapper(_getCompanies)
         .then(responseNotIsArray)
         .then(async response => {
-          if(response.ok) {
+          if (response.ok) {
             return await response.json();
           }
           throw new Error();
@@ -51,17 +52,31 @@ export default {
       path: "/users/management/edit/user/:id",
       element: <EditForm />,
       loader: ({ params }: LoaderFunctionArgs) => fetchWrapper([() => _getUser(params.id), _getCompanies])
-      .then(response => {
-        if (Array.isArray(response)) {
-          return Promise.all(response.map(async r => {
-            if (r.ok) return await r.json();
-            else if (r.status === 404) {
-              return redirect('/users/management')
-            }
-            throw new Error();
-          }))
-        }
-      })
+        .then(response => {
+          if (Array.isArray(response)) {
+            return Promise.all(response.map(async r => {
+              if (r.ok) return await r.json();
+              else if (r.status === 404) {
+                return redirect('/users/management')
+              }
+              throw new Error();
+            }))
+          }
+        })
+        .catch(() => redirect('/auth')),
+    },
+    {
+      path: "/users/management/change/password/user/:id",
+      element: <ChangePasswordForm />,
+      loader: ({ params }: LoaderFunctionArgs) => fetchWrapper(() => _getUser(params.id))
+        .then(responseNotIsArray)
+        .then(responseNotIsArray)
+        .then(res => {
+          if (res.status === 404) {
+            return redirect('/users/management')
+          }
+          return res;
+        })
         .catch(() => redirect('/auth')),
     },
   ]

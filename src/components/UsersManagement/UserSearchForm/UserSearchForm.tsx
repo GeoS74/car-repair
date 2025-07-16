@@ -25,7 +25,7 @@ export default function CarSearchForm({ setShowNextButton, setSearchResult, setQ
     }}>
 
     <fieldset disabled={disabled}>
-      <input type="search" name="query" className="form-control" placeholder="Введите гос. номер, модель или VIN ..." />
+      <input type="search" name="query" className="form-control" placeholder="Введите имя или email пользователя ..." />
 
       <input type="submit" className={classNames(`btn btn-outline-${theme === 'light' ? 'primary' : 'light'}`)} value="Поиск" />
     </fieldset>

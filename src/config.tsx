@@ -9,7 +9,7 @@ export default {
   auth: {
     back: {
       host: prod ? '' : 'http://localhost',
-      port: prod ? 0 : 3001,
+      port: prod ? 0 : 3030,
     }
   },
   info: {
