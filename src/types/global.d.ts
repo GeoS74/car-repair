@@ -115,6 +115,7 @@ interface IDoc {
 
   statusCode?: number
   car?: ICar
+  mileage?: string
 }
 
 interface IComment {

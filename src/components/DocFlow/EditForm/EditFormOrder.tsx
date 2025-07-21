@@ -80,6 +80,12 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
         errorMessage={errorMessage}
       />
 
+      <InputDefault
+        prefix="mileage"
+        label="Пробег автомобиля"
+        val={doc?.mileage}
+        errorMessage={errorMessage}
+      />
 
       <TextArea
         prefix="description"
@@ -150,12 +156,16 @@ function _getErrorResponse(error: string): IErrorMessage {
   switch (error) {
     case "invalid title":
       return { field: "title", message: "Введите номер заявки на ремонт" }
+    case "invalid mileage":
+      return { field: "mileage", message: "Укажите пробег автомобиля" }
     case "invalid directing id":
       return { field: "directSelect", message: "Не выбрано направление" }
     case "invalid task id":
       return { field: "taskSelect", message: "Не выбран тип документа" }
     case "bad mime type":
       return { field: "fileUpload", message: "Не поддерживаемый тип файлов" }
+    case "scans not be empty title":
+      return { field: "fileInput", message: "Прикрепите файл с заявкой" }
     case "invalid status code":
       return { field: "title", message: "Передан не верный статус документа" }
     default: return { field: "", message: "" }

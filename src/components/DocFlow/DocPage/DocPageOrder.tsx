@@ -19,7 +19,7 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
 
   const [doc, setDoc] = useState(docLoad);
   const [comments, setComments] = useState(commentsLoad);
-
+console.log(doc)
   return <div>
     <h3 className="mb-4">{doc.task.title || ""}</h3>
 
@@ -34,6 +34,7 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
       <p>Автомобиль: {doc.car?.carModel}</p>
       <p>Гос. номер: {doc.car?.stateNumber}</p>
       <p>VIN номер(шасси): {doc.car?.vin} </p>
+      <p>Пробег автомобиля: {doc?.mileage} </p>
 
       <hr></hr>
       <p className="mt-4">Список неисправностей:</p>
