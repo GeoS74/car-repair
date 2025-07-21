@@ -1,8 +1,12 @@
+/nginx
 /node_modules
 /public
 /src
-.dockerignore
-Dockerfile
 .git
+.dockerignore
+.eslintrc.json
 .gitignore
+docker-compose.yml
+Dockerfile
+Makefile
 tsconfig.json

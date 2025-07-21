@@ -1,72 +1,22 @@
 version: '1.0'
 services:
-  bridge_app:
-    image: "geos74/bridge:0.0.3"
-    ports:
-      - "3100:3500"
-    environment:
-      - SERVER_PORT=3500
-      - DB_USER=bridge
-      - DB_HOST=db_bridge
-      - DB_NAME=bridge
-      - DB_PASS=admin
-      - NODE_ENV=dev
-      - JWT_CHECK=true
-      - JWT_SECRET_KEY=any_secret
-      - ACTUAL_TTL=30 day
-    volumes:
-      - init-db-bridge:/bridge/libs
-      - card-photo-bridge:/bridge/files/photo
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-    restart: on-failure
-  db_bridge:
-    image: "postgres"
-    volumes:
-      - init-db-bridge:/docker-entrypoint-initdb.d
-      - db-bridge:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_USER=bridge
-      - POSTGRES_DB=bridge
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-    restart: on-failure
   mauth_app:
-    image: "geos74/mauth:1.0.0"
-    ports:
-      - "3001:3001"
+    image: "geos74/mauth:1.1.0"
     environment:
+      - NODE_ENV=prod
       - SERVER_PORT=3001
-      - NODE_ENV=dev
-      - SERVER_DOMAIN=localhost:3000
       - DB_USER=mauth
       - DB_HOST=db_mauth
       - DB_NAME=mauth
-      - DB_PASS=admin
-      - MAIL_USER=carlos.mclaughlin74@ethereal.email
-      - MAIL_PASS=HHFkMdCtXwYpy7Ej7a
-      - MAIL_HOST=smtp.ethereal.email
-      - MAIL_PORT=587
-      - MAIL_SECURE=false
-      - IGNORE_TLS=false
-      - JWT_TTL=1800
-      - JWT_SECRET_KEY=any_secret
+      - DB_PASS=${POSTGRES_PASSWORD}
+      - JWT_TTL=180
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - VERIFICATION_TTL=10 minute
       - VERIFICATION_IGNORE=true
-      - SESSION_TTL=30 day
-      - TPL_CONFIRM_PATH=/auth/confirm # or use route mauth app: /api/mauth/confirm
-      # - TPL_RECOVERY_PATH=/api/mauth/forgot
+      - SESSION_TTL=7 day
+      - REGISTRATION_PROHIBITED=true
     volumes:
       - init-db-mauth:/mauth/libs
-    deploy:
-      resources:
-        limits:
-          memory: 100M
     restart: on-failure
   db_mauth:
     image: "postgres"
@@ -74,108 +24,47 @@ services:
       - init-db-mauth:/docker-entrypoint-initdb.d
       - db-mauth:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=admin
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_USER=mauth
       - POSTGRES_DB=mauth
-    deploy:
-      resources:
-        limits:
-          memory: 100M
     restart: on-failure
-  informator:
-    image: "geos74/informator:0.0.2"
-    ports:
-      - "3200:3200"
+  cr_info_app:
+    image: "geos74/car-repair-info:0.0.4"
     environment:
-      - SERVER_PORT=3200
-      - NODE_ENV=dev
+      - NODE_ENV=prod
+      - SERVER_PORT=3020
       - DB_USER=root
-      - DB_PASS=passwordXXX
-      - DB_HOST=db_info
+      - DB_PASS=${MONGO_DB_PASS}
+      - DB_HOST=db_cr_info
       - DB_PORT=27017
       - DB_NAME=admin
+      - CREATE_AUTOINDEX=true
       - JWT_CHECK=true
-      - JWT_SECRET_KEY=any_secret
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     volumes:
-      - user-avatar-informator:/informator/files/photo
-      - init-db-informator:/informator/libs/db.init
-    deploy:
-      resources:
-        limits:
-          memory: 100M
+      - files-db_cr_info:/car-repair-info/files
+      - init-db_cr_info:/car-repair-info/libs/db.init
     restart: on-failure
-  db_info:
+  db_cr_info:
     image: "mongo"
     volumes:
-      - db-informator:/data/db
-      - init-db-informator:/docker-entrypoint-initdb.d
+      - db_cr_info:/data/db
+      - init-db_cr_info:/docker-entrypoint-initdb.d
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=passwordXXX
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_DB_PASS}
       - MONGO_INITDB_DATABASE=admin
-    deploy:
-      resources:
-        limits:
-          memory: 500M
     restart: on-failure
-  # db_mnote:
-  #   image: "mongo"
-  #   volumes:
-  #     - db-mnote:/data/db
-  #   environment:
-  #     - MONGO_INITDB_ROOT_USERNAME=root
-  #     - MONGO_INITDB_ROOT_PASSWORD=passwordXXX
-  #     - MONGO_INITDB_DATABASE=admin
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         memory: 500M
-  #   restart: on-failure
-  mnote_app:
-    image: "geos74/mnote:0.0.1"
+  main:
+    image: "geos74/car-repair:0.0.6"
     ports:
-      - "3300:3300"
-    environment:
-      - SERVER_PORT=3300
-      - NODE_ENV=dev
-      - DB_USER=root
-      - DB_PASS=passwordXXX
-      - DB_HOST=db_info
-      - DB_PORT=27017
-      - DB_NAME=admin
-      - JWT_CHECK=true
-      - JWT_SECRET_KEY=any_secret
-    deploy:
-      resources:
-        limits:
-          memory: 100M
+      - "80:80"
     volumes:
-      - files-mnote:/mnote/files/images
+      - ./nginx/main.conf:/etc/nginx/conf.d/default.conf
     restart: on-failure
-  # react:
-  #   image: "geos74/signal:0.0.1"
-  #   # build: .
-  #   ports:
-  #     - "3000:80"
-  #     - "443:443"
-  #   environment:
-  #     - HOST_BRIDGE=bridge_app
-  #     - PORT_BRIDGE=3500
-  #     - HOST_MAUTH=mauth_app
-  #     - PORT_MAUTH=3001
-  #     - HOST_INFORMATOR=informator
-  #     - PORT_INFORMATOR=3200
-  #     - HOST_MNOTE=mnote_app
-  #     - PORT_MNOTE=3300
-  #   restart: on-failure
 volumes:
-  init-db-bridge:
-  db-bridge:
-  card-photo-bridge:
   init-db-mauth:
   db-mauth:
-  db-informator:
-  user-avatar-informator:
-  init-db-informator:
-  db-mnote:
-  files-mnote:
+  files-db_cr_info:
+  init-db_cr_info:
+  db_cr_info:
