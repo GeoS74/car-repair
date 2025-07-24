@@ -13,7 +13,7 @@ type Props = {
 
 export default function CheckBoxDefault({ prefix, label, errorMessage, disabled = false }: Props) {
   return <>
-    <div className={classNames(styles.root, "form-check", "mt-4")}>
+    <div className={classNames(styles.root, "form-check", "mt-0")}>
       <input
         type="checkbox"
         id={`${prefix}CheckBox`}

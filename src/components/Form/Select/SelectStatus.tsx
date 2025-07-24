@@ -14,15 +14,17 @@ type Props = {
 
 export default function Selectfault({ prefix, options, val, label, errorMessage, defaultOptionTitle, disabled = false }: Props) {
   return <>
-    <div className={classNames(styles.root, "mt-4")}>
-      <label htmlFor={`${prefix}Select`} className="form-label mt-1">{label || "Список"}</label>
-      
-      <select 
-      name={`${prefix}`}
-      id={`${prefix}Select`}
-      defaultValue={val}
-      disabled={disabled}
-      className="form-select btn-outline-light"
+    <div className={classNames(styles.root, "mt-0")}>
+      {label ?
+        <label htmlFor={`${prefix}Select`} className="form-label mt-1">{label || "Список"}</label>
+        : <></>}
+
+      <select
+        name={`${prefix}`}
+        id={`${prefix}Select`}
+        defaultValue={val}
+        disabled={disabled}
+        className="form-select btn-outline-light"
       >
         <option value="">{defaultOptionTitle || 'Выберите из списка'}</option>
         {_mekeOptions(options)}

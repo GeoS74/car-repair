@@ -10,8 +10,8 @@ import { responseNotIsArray } from "../../../middleware/response.validator";
 
 import SelectDefault from "../../Form/Select/SelectDefault";
 import SelectStatus from "../../Form/Select/SelectStatus";
-import CheckBoxDefault from "../../Form/CheckBox/CheckBoxDefault";
-import Calendar from "../../Common/Calendar/Calendar";
+// import CheckBoxDefault from "../../Form/CheckBox/CheckBoxDefault";
+import CalendarPane from "./CalendarPane/CalendarPane";
 
 import classNames from "classnames";
 import styles from "./styles.module.css"
@@ -26,8 +26,9 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
   const [disabled, setDisabled] = useState(false);
   const theme = (useSelector((state) => state) as { theme: { theme: string } }).theme.theme;
   const statuses = useSelector((state: StoreState) => state.status.items);
-
   const directings = session.getMe()?.roles[0]?.directings;
+
+  const [resetKey, setResetKey] = useState(1);
 
   return <form id="searchForm" className={styles.root}
     onSubmit={(event) => {
@@ -36,35 +37,47 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
     }}>
 
     <fieldset disabled={disabled}>
-      <input type="search" name="query" className="form-control" placeholder="Поиск документов ..." />
-      <input type="submit" className={classNames(`btn btn-outline-${theme === 'light' ? 'primary' : 'light'}`)} value="Поиск" />
-    </fieldset>
-
-    <fieldset disabled={disabled}>
-
-      <Calendar />
+      <input
+        key={resetKey + 1}
+        type="search"
+        name="query"
+        className="form-control"
+        placeholder="Поиск документов ..." />
 
       <SelectStatus
+        key={resetKey + 2}
         prefix="statusCode"
-        label="Статус заявки:"
+        // label="Статус заявки:"
         options={statuses}
-        defaultOptionTitle="Выберите статус"
+        defaultOptionTitle="Выберите этап"
       />
 
       {
         directings && directings.length > 1 ?
           <SelectDefault
+            key={resetKey + 3}
             prefix="directing"
-            label="Подразделение:"
+            // label="Подразделение:"
             options={directings}
             defaultOptionTitle="Выберите подразделение"
           /> : <></>
       }
 
-      <CheckBoxDefault
+      <input type="submit" className={classNames(`btn btn-outline-${theme === 'light' ? 'primary' : 'light'}`)} value="Поиск" />
+      <span
+        className={classNames(`btn btn-outline-secondary`)}
+        onClick={() => setResetKey(resetKey + 1)}
+      >Сбросить</span>
+    </fieldset>
+
+    <fieldset disabled={disabled} className="mt-4">
+
+      {/* <CheckBoxDefault
         prefix="author"
         label="мои заявки"
-      />
+      /> */}
+
+      <CalendarPane key={resetKey + 4} />
 
     </fieldset>
   </form>
