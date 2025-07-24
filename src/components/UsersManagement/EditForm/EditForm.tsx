@@ -63,6 +63,7 @@ export default function EditForm() {
         label="Компания"
         options={companies}
         val={user?.company?.id+""}
+        defaultOptionTitle="Выберите компанию"
       />
 
       <ButtonSubmit

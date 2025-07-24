@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 
 type Props = {
   prefix: string,
-  options: ISimpleRow[]
+  options: IStatus[]
   val?: string
   label?: string
   errorMessage?: IErrorMessage
@@ -32,6 +32,6 @@ export default function Selectfault({ prefix, options, val, label, errorMessage,
   </>
 }
 
-function _mekeOptions(rows: ISimpleRow[]) {
-  return rows.map(row => <option value={row.id} key={row.id}>{row.title}</option>)
+function _mekeOptions(rows: IStatus[]) {
+  return rows.map(row => <option value={row.code} key={row.code}>{row.title}</option>)
 }

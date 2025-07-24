@@ -19,7 +19,7 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
 
   const [doc, setDoc] = useState(docLoad);
   const [comments, setComments] = useState(commentsLoad);
-console.log(doc)
+
   return <div>
     <h3 className="mb-4">{doc.task.title || ""}</h3>
 

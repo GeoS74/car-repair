@@ -21,14 +21,14 @@ export default function UserPage() {
     <div>
       <Avatar userPhoto={user.photo} />
 
-      <input type="submit" className={classNames(`btn mt-4 mb-2 btn-outline-${theme === 'light' ? 'primary' : 'light'}`)}
+      {/* <input type="submit" className={classNames(`btn mt-4 mb-2 btn-outline-${theme === 'light' ? 'primary' : 'light'}`)}
         value={editMode ? "Сохранить изменения" : "Редактировать профиль"}
         onClick={event => {
           (event.currentTarget.parentElement?.nextElementSibling?.querySelector('input[type=submit]') as HTMLInputElement).click()
         }}
-      />
+      /> */}
 
-      <input type="submit" className={classNames(`btn mt-1 mb-2 btn-outline-${theme === 'light' ? 'primary' : 'light'}`)}
+      <input type="submit" className={classNames(`btn mt-4 mb-2 btn-outline-${theme === 'light' ? 'primary' : 'light'}`)}
         value="Изменить пароль"
         onClick={() => navigate('/user/changePassword')}
       />

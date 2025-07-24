@@ -37,7 +37,7 @@ async function onSubmit(
 
   // const query = sessionStorage.getItem('lastQuery') || "";
 
-  fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/search/doc/${querySearch}&last=${lastId}`, {
+  fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/search/doccar/${querySearch}&last=${lastId}`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     },
