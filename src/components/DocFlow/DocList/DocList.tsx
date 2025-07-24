@@ -7,12 +7,6 @@ import NextSearch from "../NextSearch/NextSearch";
 import styles from "./styles.module.css";
 import { useState } from "react";
 
-
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 export default function DocList() {
   session.subscribe('DocList');
 
@@ -21,9 +15,6 @@ export default function DocList() {
   const {state, search} = useLocation();
   const [query, setQuery] = useState(search);
   
-
-   const [value, onChange] = useState<Value>([new Date(), new Date()]);
-
   //  console.log(search)
   //  console.log(query)
     
@@ -45,8 +36,6 @@ export default function DocList() {
           setShowNextButton={setShowNextButton}
           setQuery={setQuery}
         />
-
-    <Calendar onChange={onChange} value={value} selectRange={true} />
 
     {docs?.map(doc => <DocRow key={doc.id} {...doc} />)}
 

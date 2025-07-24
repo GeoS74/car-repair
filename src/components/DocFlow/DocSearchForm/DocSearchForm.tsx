@@ -11,6 +11,7 @@ import { responseNotIsArray } from "../../../middleware/response.validator";
 import SelectDefault from "../../Form/Select/SelectDefault";
 import SelectStatus from "../../Form/Select/SelectStatus";
 import CheckBoxDefault from "../../Form/CheckBox/CheckBoxDefault";
+import Calendar from "../../Common/Calendar/Calendar";
 
 import classNames from "classnames";
 import styles from "./styles.module.css"
@@ -28,8 +29,6 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
 
   const directings = session.getMe()?.roles[0]?.directings;
 
-  console.log(session.getMe()?.roles)
-
   return <form id="searchForm" className={styles.root}
     onSubmit={(event) => {
       setShowNextButton(false)
@@ -42,6 +41,9 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
     </fieldset>
 
     <fieldset disabled={disabled}>
+
+      <Calendar />
+
       <SelectStatus
         prefix="statusCode"
         label="Статус заявки:"
@@ -61,7 +63,6 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
 
       <CheckBoxDefault
         prefix="author"
-        // val="1"
         label="мои заявки"
       />
 
@@ -83,6 +84,9 @@ function _makeQueryString(fd: FormData) {
   }
   if (fd.get('author')) {
     query.push(`author=1`);
+  }
+  if (fd.get('calendar')) {
+    query.push(`calendar=${fd.get('calendar')}`);
   }
 
   return '?' + query.join('&');
