@@ -1,3 +1,6 @@
 .root input {
     border: solid 2px var(--color);
 }
+.root select:hover{
+  cursor: pointer;
+}
