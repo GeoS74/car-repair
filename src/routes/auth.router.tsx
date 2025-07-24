@@ -1,15 +1,17 @@
-import { Outlet, redirect } from "react-router-dom"
+import { Outlet, redirect } from "react-router-dom";
 
-import tokenManager from "../libs/token.manager"
-import Navigate from "../components/navigate/Navigate"
-import { AuthForm } from "../components/AuthForm/AuthForm"
-import { InfoCard } from "../components/AuthForm/InfoCard/InfoCard"
-import serviceHost from "../libs/service.host"
-import session from "../libs/token.manager"
+import tokenManager from "../libs/token.manager";
+import Navigate from "../components/navigate/Navigate";
+import { AuthForm } from "../components/AuthForm/AuthForm";
+import { InfoCard } from "../components/AuthForm/InfoCard/InfoCard";
+import Head from "../components/Head/Head";
+import serviceHost from "../libs/service.host";
+import session from "../libs/token.manager";
 
 export default {
   path: "/auth",
   element: <>
+    <Head title="Авторизация" description="" />
     <Navigate />
     <Outlet />
   </>,
@@ -22,7 +24,7 @@ export default {
       path: "/auth/signout",
       element: <></>,
       loader: () => {
-        
+
         fetch(`${serviceHost("mauth")}/api/mauth/signout/`, {
           method: 'DELETE',
           headers: {
@@ -36,7 +38,7 @@ export default {
     },
     {
       path: "/auth/confirm/:token",
-      element: <InfoCard mode="confirm"/>,
+      element: <InfoCard mode="confirm" />,
       loader: ({ params }: { params: unknown }) => {
 
         if (typeof params === 'object' && params !== null) {
