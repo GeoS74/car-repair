@@ -24,8 +24,8 @@ export default function DocList() {
 
    const [value, onChange] = useState<Value>([new Date(), new Date()]);
 
-   console.log(search)
-   console.log(query)
+  //  console.log(search)
+  //  console.log(query)
     
 
 /**

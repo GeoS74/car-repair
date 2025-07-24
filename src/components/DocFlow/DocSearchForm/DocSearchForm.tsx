@@ -10,6 +10,7 @@ import { responseNotIsArray } from "../../../middleware/response.validator";
 
 import SelectDefault from "../../Form/Select/SelectDefault";
 import SelectStatus from "../../Form/Select/SelectStatus";
+import CheckBoxDefault from "../../Form/CheckBox/CheckBoxDefault";
 
 import classNames from "classnames";
 import styles from "./styles.module.css"
@@ -37,9 +38,6 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
 
     <fieldset disabled={disabled}>
       <input type="search" name="query" className="form-control" placeholder="Поиск документов ..." />
-
-
-
       <input type="submit" className={classNames(`btn btn-outline-${theme === 'light' ? 'primary' : 'light'}`)} value="Поиск" />
     </fieldset>
 
@@ -61,6 +59,12 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
           /> : <></>
       }
 
+      <CheckBoxDefault
+        prefix="author"
+        // val="1"
+        label="мои заявки"
+      />
+
     </fieldset>
   </form>
 }
@@ -68,14 +72,17 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
 function _makeQueryString(fd: FormData) {
   const query = [];
 
-  if(fd.get('query')) {
+  if (fd.get('query')) {
     query.push(`search=${fd.get('query')}`);
   }
-  if(fd.get('statusCode')) {
+  if (fd.get('statusCode')) {
     query.push(`statusCode=${fd.get('statusCode')}`);
   }
-  if(fd.get('directing')) {
+  if (fd.get('directing')) {
     query.push(`directing=${fd.get('directing')}`);
+  }
+  if (fd.get('author')) {
+    query.push(`author=1`);
   }
 
   return '?' + query.join('&');
