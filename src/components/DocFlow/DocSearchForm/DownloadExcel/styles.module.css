@@ -1,0 +1,13 @@
+.root {
+  padding-right: 25px;
+}
+
+
+.root svg {
+  color: rgb(0, 172, 0);
+  width: 35px;
+  height: 35px;
+}
+.root svg:hover {
+  cursor: pointer;
+}

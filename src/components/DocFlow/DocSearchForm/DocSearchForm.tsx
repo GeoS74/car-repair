@@ -8,6 +8,7 @@ import serviceHost from "../../../libs/service.host";
 import tokenManager from "../../../libs/token.manager";
 import { responseNotIsArray } from "../../../middleware/response.validator";
 
+import DownloadExcel from "./DownloadExcel/DownloadExcel";
 import SelectDefault from "../../Form/Select/SelectDefault";
 import SelectStatus from "../../Form/Select/SelectStatus";
 // import CheckBoxDefault from "../../Form/CheckBox/CheckBoxDefault";
@@ -37,6 +38,8 @@ export default function DocSearchForm({ setShowNextButton, setSearchResult, setQ
     }}>
 
     <fieldset disabled={disabled}>
+      <DownloadExcel />
+      
       <input
         key={resetKey + 1}
         type="search"
