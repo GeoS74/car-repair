@@ -1,5 +1,6 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { ReactComponent as Icon } from "./image/filetype-xlsx.svg";
+import { ReactComponent as Rotate } from "./image/rotate.svg";
 
 import fetchWrapper from "../../../../libs/fetch.wrapper";
 import serviceHost from "../../../../libs/service.host";
@@ -10,13 +11,16 @@ import classNames from "classnames";
 import styles from "./styles.module.css"
 
 export default function DownloadExcel() {
-  // const [showWidget, setShowWidget] = useState(false);
+  const [isDownload, setIsDownload] = useState(false);
 
   return <div className={classNames(styles.root)}>
-    <Icon width="25" height="25"
-      onClick={(event) => _downloadFile(event)}
-    />
 
+    {isDownload ?
+      <Rotate width="25" height="25" /> :
+      <Icon width="25" height="25"
+        onClick={(event) => _downloadFile(event, setIsDownload)}
+      />
+    }
   </div>
 }
 
@@ -42,8 +46,11 @@ function _makeQueryString(fd: FormData) {
   return '?' + query.join('&');
 }
 
-async function _downloadFile(event: React.MouseEvent<SVGSVGElement, MouseEvent>) {
-
+async function _downloadFile(
+  event: React.MouseEvent<SVGSVGElement, MouseEvent>,
+  setIsDownload: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  setIsDownload(true);
   const fd = new FormData(event?.currentTarget.parentNode?.parentNode?.parentNode as HTMLFormElement);
   const query = _makeQueryString(fd);
 
@@ -60,12 +67,12 @@ async function _downloadFile(event: React.MouseEvent<SVGSVGElement, MouseEvent>)
         const url = window.URL.createObjectURL(res);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'Автосервис - выгрузка данных.xlsx';
+        a.download = 'БОВИД - ремонты.xlsx';
         a.click();
         window.URL.revokeObjectURL(url);
-
       }
       throw new Error(`response status: ${response.status}`)
     })
-    .catch(error => console.log(error.message));
+    .catch(error => console.log(error.message))
+    .finally(() => setIsDownload(false));
 }
