@@ -14,6 +14,7 @@ export default function CarPage() {
     <h3 className="mt-4">{car.carModel}</h3>
     <p>Гос. номер: {car.stateNumber}</p>
     <p>VIN-код: {car.vin}</p>
+    <p>№ шасси: {car.chassisNumber}</p>
     <p>Год выпуска: {car.yearProduction}</p>
     <p>Местонахождение: {car.place}</p>
   </div>

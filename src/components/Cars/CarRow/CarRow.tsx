@@ -12,6 +12,7 @@ export default function CarRow({ ...car }: ICar) {
 
     <small>гос. номер: {car.stateNumber}</small><br/>
     <small>VIN-код: {car.vin}</small><br/>
+    <small>№ шасси: {car.chassisNumber}</small><br/>
     <small>год выпуска: {car.yearProduction} </small><br/>
     <small>местонахождение: {car.place}</small>
   </div>

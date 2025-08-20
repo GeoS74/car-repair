@@ -54,6 +54,12 @@ export default function EditForm() {
         errorMessage={errorMessage} />
 
       <InputDefault
+        prefix="chassisNumber"
+        label="№ шасси"
+        val={car?.chassisNumber}
+        errorMessage={errorMessage} />
+
+      <InputDefault
         prefix="yearProduction"
         label="Год выпуска"
         val={car?.yearProduction}

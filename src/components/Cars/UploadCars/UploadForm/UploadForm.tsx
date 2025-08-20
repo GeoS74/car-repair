@@ -51,15 +51,21 @@ export default function UploadForm({ setUploadCarsComplete }: Props) {
         errorMessage={errorMessage} />
 
       <InputDefault
+        prefix="chassisNumberField"
+        label="Столбец: № шасси (буква или цифра)"
+        placeholder="D"
+        errorMessage={errorMessage} />
+
+      <InputDefault
         prefix="placeField"
         label="Столбец: место приписки (буква или цифра)"
-        placeholder="D"
+        placeholder="E"
         errorMessage={errorMessage} />
 
       <InputDefault
         prefix="yearProductionField"
         label="Столбец: год выпуска (буква или цифра)"
-        placeholder="E"
+        placeholder="F"
         errorMessage={errorMessage} />
 
       <hr />

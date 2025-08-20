@@ -241,6 +241,7 @@ interface ICar {
   carModel: string
   yearProduction: string
   vin: string
+  chassisNumber: string
   place: string
   stateNumber: string
 }

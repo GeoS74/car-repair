@@ -20,7 +20,8 @@ export default function DocRowOrder({ ...doc }: IDoc) {
 
     <p>Автомобиль: {doc.car?.carModel}</p>
     <p>Гос. номер: {doc.car?.stateNumber}</p>
-    <p>VIN номер(шасси): {doc.car?.vin}</p>
+    <p>VIN-код: {doc.car?.vin}</p>
+    <p>№ шасси: {doc.car?.chassisNumber}</p>
     <p>Пробег автомобиля: {doc?.mileage}</p>
 
     {/* <Description {...doc} limit={350} /> */}

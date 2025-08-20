@@ -71,6 +71,13 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
           val={car?.vin}
           disabled={true}
         />
+
+        <InputDefault
+          prefix="stateNumber"
+          label="№ шасси"
+          val={car?.chassisNumber}
+          disabled={true}
+        />
       </div>
 
       <InputDefault
