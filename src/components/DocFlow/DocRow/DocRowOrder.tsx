@@ -10,6 +10,11 @@ import Status from "../DocPage/Status/Status";
 
 export default function DocRowOrder({ ...doc }: IDoc) {
 
+  {/* для документов Высочайший идёт сквозная нумерация*/}
+  if(doc.directing.title.search(/высочайший/i) !== -1) {
+    doc.title = doc.num.toString();
+  }
+
   return <div className={classNames(styles.root, "mt-2")}>
 
     <OptionalHeader {...doc} />

@@ -11,7 +11,6 @@ import FileNameList from "./FileNameList/FileNameList"
 import HiddenInput from "./HiddenInput/HiddenInput";
 import OptionalHeader from "./OptionalHeader/OptionalHeader";
 import StatusInput from "./StatusInput/StatusInput";
-
 import InputDefault from "../../Form/Input/InputDefault";
 import TextArea from "../../Form/TextArea/TextArea";
 import ButtonCancel from "../../Form/ButtonCancel/ButtonCancel";
@@ -33,6 +32,11 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
   const navigate = useNavigate();
 
   const [fileList, setFileList] = useState<FileList[]>([]);
+
+  {/* для документов Высочайший идёт сквозная нумерация*/}
+  if(doc && doc.directing.title.search(/высочайший/i) !== -1) {
+    doc.title = doc.num.toString();
+  }
 
   return <form className={styles.root}
     onSubmit={event => _onSubmit(
@@ -80,12 +84,19 @@ export default function EditForm({ typeDoc, doc, car }: Props) {
         />
       </div>
 
-      <InputDefault
-        prefix="title"
-        label="Номер заявки на ремонт"
-        val={doc?.title}
-        errorMessage={errorMessage}
-      />
+
+
+      {/* сотрудники Высочайший не устанавливают номер заявки,
+      для них идёт сквозная нумерация */}
+      {typeDoc.directing.title.search(/высочайший/i) === -1 ?
+        <InputDefault
+          prefix="title"
+          label="Номер заявки на ремонт"
+          val={doc?.title}
+          errorMessage={errorMessage}
+        /> :
+        <input type="hidden" name="title" defaultValue="default title" />
+      }
 
       <InputDefault
         prefix="mileage"

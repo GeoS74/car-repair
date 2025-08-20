@@ -18,6 +18,11 @@ type Props = {
 export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
   useEffect(() => window.scrollTo(0, 0)); // прокрутка страницы к верху
 
+  {/* для документов Высочайший идёт сквозная нумерация*/}
+  if(docLoad.directing.title.search(/высочайший/i) !== -1) {
+    docLoad.title = docLoad.num.toString();
+  }
+
   const [doc, setDoc] = useState(docLoad);
   const [comments, setComments] = useState(commentsLoad);
 
