@@ -6,6 +6,7 @@ import Description from "./Description/Description";
 import Author from "./Author/Author";
 import Status from "./Status/Status";
 import ChangeStatusButton from "./ChangeStatusButton/ChangeStatusButton";
+import StatusHistory from "../StatusHistory/StatusHistory";
 import Comments from "../Comments/Comments";
 import styles from "./styles.module.css";
 
@@ -37,6 +38,8 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
       <p>№ шасси: {doc.car?.chassisNumber} </p>
       <p>Пробег автомобиля: {doc?.mileage} </p>
 
+
+
       <hr></hr>
       <p className="mt-4">Список неисправностей:</p>
       <Description {...doc} />
@@ -48,6 +51,15 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
 
       <Author {...doc} />
     </div>
+
+    {/* добавить в массив комментариев информацию о создании заявки */}
+    <StatusHistory comments={[{
+      id: '',
+      comment: 'перевёл заказ на следующий статус "Заявка создана"',
+      author: doc.author,
+      createdAt: doc.createdAt,
+      files: []
+    }, ...comments]} />
 
     <Comments
       docId={doc.id}
