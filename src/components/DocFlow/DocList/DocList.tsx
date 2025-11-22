@@ -14,7 +14,7 @@ export default function DocList() {
   const [showNextButton, setShowNextButton] = useState(true)
   const {state, search} = useLocation();
   const [query, setQuery] = useState(search);
-  
+
   //  console.log(search)
   //  console.log(query)
     

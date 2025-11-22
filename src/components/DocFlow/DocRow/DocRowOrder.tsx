@@ -31,7 +31,7 @@ export default function DocRowOrder({ ...doc }: IDoc) {
 
     {/* <Description {...doc} limit={350} /> */}
 
-    <FileLinkedList files={doc.files} />
+    <FileLinkedList files={doc.files} statusCode={doc.statusCode} />
 
     <Author {...doc} />
   </div>

@@ -43,13 +43,11 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
       <p>№ шасси: {doc.car?.chassisNumber} </p>
       <p>Пробег автомобиля: {doc?.mileage} </p>
 
-
-
       <hr></hr>
       <p className="mt-4">Список неисправностей:</p>
       <Description {...doc} />
 
-      <FileLinkedList files={doc.files} />
+      <FileLinkedList files={doc.files} statusCode={doc.statusCode} />
 
       <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
       <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
