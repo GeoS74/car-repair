@@ -12,26 +12,28 @@ type Props = {
   statusCode?: number
 }
 
+function _getFileLink(
+  file: IStaticFile,
+  signed = false
+) {
+  // подписываать только pdf
+  if(file.fileName.indexOf(".pdf") !== -1 && signed) {
+    return <span 
+    onClick={() => _downloadFile(file.fileName)}>
+       {file.originalName}
+    </span>
+  }
+
+  return  <a
+            // className="text-muted"
+            href={`${serviceHost('informator')}/api/informator/docflow/scan/${file.fileName}`}
+            download={file.originalName}
+            target="_blank"
+            rel="noopener noreferrer"
+          >{file.originalName}</a>
+}
+
 export default function FileLinkedList({ files, statusCode }: Props) {
-  if(statusCode && statusCode > 60) {
-    return <div className={classNames(styles.root, "mb-4")}>
-        {files.length ? <p className="mt-4">Прикреплённые файлы:</p> : <></>}
-        <ul>
-          {files.map((file, i) => {
-            return <li 
-              key={file.fileName + i} 
-              className={styles.link}
-              onClick={() => _downloadFile(file.fileName)}
-            >
-              <FileIcon width="25" height="25" />
-
-              {file.originalName}
-            </li>
-          })}
-        </ul>
-      </div>
-    }
-
   return <div className={classNames(styles.root, "mb-4")}>
     {files.length ? <p className="mt-4">Прикреплённые файлы:</p> : <></>}
     <ul>
@@ -41,6 +43,8 @@ export default function FileLinkedList({ files, statusCode }: Props) {
           className={styles.link}
         >
           <FileIcon width="25" height="25" />
+
+          {_getFileLink(file, !!statusCode && statusCode > 60 )}
 
           <a
             // className="text-muted"
