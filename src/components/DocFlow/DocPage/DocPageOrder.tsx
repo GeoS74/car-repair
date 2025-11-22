@@ -58,13 +58,13 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
     </div>
 
     {/* добавить в массив комментариев информацию о создании заявки */}
-    <StatusHistory comments={[{
+    <StatusHistory comments={[...comments, {
       id: '',
       comment: 'перевёл заказ на следующий статус "Заявка создана"',
       author: doc.author,
       createdAt: doc.createdAt,
       files: []
-    }, ...comments]} />
+    }]} />
 
     <Comments
       docId={doc.id}

@@ -36,8 +36,8 @@ function _generateTable(comments: IComment[]) {
     <thead>
       <tr>
         <td>Статус</td>
-        <td>Дата изменения</td>
         <td>Пользователь</td>
+        <td>Дата изменения</td>
       </tr>
     </thead>
     <tbody>
@@ -45,8 +45,8 @@ function _generateTable(comments: IComment[]) {
         _makeStatusHistory(comments).reverse().map((e, i) => {
           return <tr key={i}>
             <td>{e.status}</td>
-            <td>{e.createdAt}</td>
             <td>{e.author}</td>
+            <td>{e.createdAt}</td>
           </tr>
         })
       }
@@ -60,7 +60,7 @@ function _makeStatusHistory(comments: IComment[]) {
   const arr: HStatus[] = [];
 
   comments.map(e => {
-    if (e.comment.indexOf("перевёл заказ на следующий статус") === 0 || e.comment.indexOf("вернул назад на этап")) {
+    if (e.comment.indexOf("перевёл заказ на следующий статус") === 0 || e.comment.indexOf("вернул назад на этап") !== -1) {
       const c = e.comment.match(/"([^"]+)"/g);
       arr.push({
         status: c ? c[c.length - 1] : '',

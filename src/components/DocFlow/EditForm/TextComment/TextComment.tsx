@@ -9,7 +9,7 @@ type Props = {
 export default function TextComment({ errorMessage }: Props) {
   return <>
     <div className={classNames("form-group mb-4", styles.root)}>
-      <label htmlFor="commentTextarea" className="form-label mt-4">Добавить поясение</label>
+      <label htmlFor="commentTextarea" className="form-label mt-4">Добавить пояснение</label>
       <textarea className="form-control" id="commentTextarea" name="comment" ></textarea>
     </div>
     {errorMessage?.field === "commentTextarea" ? <ErrorMessage errorMessage={errorMessage.message} /> : <></>}
