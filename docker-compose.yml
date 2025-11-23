@@ -17,9 +17,10 @@ services:
       - REGISTRATION_PROHIBITED=true
     volumes:
       - init-db-mauth:/mauth/libs
+      - ./scripts:/mauth/foo
     restart: on-failure
   db_mauth:
-    image: "postgres"
+    image: "postgres:15.15-trixie"
     volumes:
       - init-db-mauth:/docker-entrypoint-initdb.d
       - db-mauth:/var/lib/postgresql/data
@@ -29,7 +30,7 @@ services:
       - POSTGRES_DB=mauth
     restart: on-failure
   cr_info_app:
-    image: "geos74/car-repair-info:0.0.4"
+    image: "geos74/car-repair-info:0.0.5"
     environment:
       - NODE_ENV=prod
       - SERVER_PORT=3020
@@ -41,6 +42,7 @@ services:
       - CREATE_AUTOINDEX=true
       - JWT_CHECK=true
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - AUTO_INDEX=true
     volumes:
       - files-db_cr_info:/car-repair-info/files
       - init-db_cr_info:/car-repair-info/libs/db.init
@@ -56,7 +58,7 @@ services:
       - MONGO_INITDB_DATABASE=admin
     restart: on-failure
   main:
-    image: "geos74/car-repair:0.0.6"
+    image: "geos74/car-repair:0.0.7"
     ports:
       - "80:80"
     volumes:
