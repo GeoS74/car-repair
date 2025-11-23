@@ -9,58 +9,47 @@ import styles from "./styles.module.css";
 
 type Props = {
   files: IStaticFile[],
-  statusCode?: number
+  signed?: boolean
 }
 
-function _getFileLink(
-  file: IStaticFile,
-  signed = false
-) {
-  // подписываать только pdf
-  if(file.fileName.indexOf(".pdf") !== -1 && signed) {
-    return <span 
-    onClick={() => _downloadFile(file.fileName)}>
-       {file.originalName}
-    </span>
-  }
-
-  return  <a
-            // className="text-muted"
-            href={`${serviceHost('informator')}/api/informator/docflow/scan/${file.fileName}`}
-            download={file.originalName}
-            target="_blank"
-            rel="noopener noreferrer"
-          >{file.originalName}</a>
-}
-
-export default function FileLinkedList({ files, statusCode }: Props) {
+export default function FileLinkedList({ files, signed }: Props) {
   return <div className={classNames(styles.root, "mb-4")}>
     {files.length ? <p className="mt-4">Прикреплённые файлы:</p> : <></>}
     <ul>
       {files.map((file, i) => {
-        return <li 
-          key={file.fileName + i} 
+        return <li
+          key={file.fileName + i}
           className={styles.link}
         >
           <FileIcon width="25" height="25" />
 
-          {_getFileLink(file, !!statusCode && statusCode > 60 )}
-
-          <a
-            // className="text-muted"
-            href={`${serviceHost('informator')}/api/informator/docflow/scan/${file.fileName}`}
-            download={file.originalName}
-            target="_blank"
-            rel="noopener noreferrer"
-          >{file.originalName}</a>
+          {_getFileLink(file, signed)}
         </li>
       })}
     </ul>
   </div>
 }
 
+function _getFileLink(file: IStaticFile, signed = false) {
+  // подписывать только pdf
+  if (file.fileName.search(/\.pdf$/i) !== -1 && signed) {
+    return <span
+      onClick={() => _downloadFile(file.fileName)}>
+      {file.originalName}
+    </span>
+  }
+
+  return <a
+    // className="text-muted"
+    href={`${serviceHost('informator')}/api/informator/docflow/scan/${file.fileName}`}
+    download={file.originalName}
+    target="_blank"
+    rel="noopener noreferrer"
+  >{file.originalName}</a>
+}
+
 function _downloadFile(fname: string) {
-fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/download/scan/${fname}`, {
+  fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/download/scan/${fname}`, {
     headers: {
       'Authorization': `Bearer ${tokenManager.getAccess()}`
     },
@@ -73,7 +62,7 @@ fetchWrapper(() => fetch(`${serviceHost('informator')}/api/informator/docflow/do
         const url = window.URL.createObjectURL(res);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'test.pdf';
+        a.download = fname;
         a.click();
         window.URL.revokeObjectURL(url);
       }

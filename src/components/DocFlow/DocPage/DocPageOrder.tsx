@@ -18,13 +18,13 @@ type Props = {
 export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
   useEffect(() => window.scrollTo(0, 0)); // прокрутка страницы к верху
 
-  {/* для документов Высочайший идёт сквозная нумерация*/}
-  if(docLoad.directing.title.search(/высочайший/i) !== -1) {
-    docLoad.title = docLoad.num.toString();
-  }
-
   const [doc, setDoc] = useState(docLoad);
   const [comments, setComments] = useState(commentsLoad);
+
+  {/* для документов Высочайший идёт сквозная нумерация*/}
+  if(doc.directing.title.search(/высочайший/i) !== -1) {
+    doc.title = doc.num.toString();
+  }
 
   return <div>
     <h3 className="mb-4">{doc.task.title || ""}</h3>
@@ -47,7 +47,10 @@ export default function DocPageOrder({ docLoad, commentsLoad }: Props) {
       <p className="mt-4">Список неисправностей:</p>
       <Description {...doc} />
 
-      <FileLinkedList files={doc.files} statusCode={doc.statusCode} />
+      <FileLinkedList 
+        files={doc.files} 
+        signed={!!doc.statusCode && doc.statusCode > 60} 
+      />
 
       <ChangeStatusButton {...doc} statusMode={"prev"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
       <ChangeStatusButton {...doc} statusMode={"next"} setDoc={setDoc} addComment={(comment: IComment) => setComments([comment, ...comments])} />
