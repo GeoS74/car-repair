@@ -11,6 +11,8 @@ import { ReactComponent as IconFire } from "./icons/fire.svg";
 import { ReactComponent as IconFolder } from "./icons/folder.svg";
 import { ReactComponent as IconTools } from "./icons/tools.svg";
 import { ReactComponent as IconHandUp } from "./icons/hand-thumbs-up.svg";
+import { ReactComponent as Icon1 } from "./icons/building-add.svg";
+import { ReactComponent as Icon2 } from "./icons/filter-square.svg";
 // import AddDocButton from "./AddDocButton/AddDocButton";
 import AddOrderButton from "./AddOrderButton/AddOrderButton";
 // import DepAddInvoice from "./DepAddInvoice/DepAddInvoice";
@@ -59,10 +61,31 @@ export default function DocBarPanel() {
         isNavigating={isNavigating}
       />
 
+      {/* <DocBar
+        title="Ремонт завершен"
+        Icon={IconHandUp}
+        queryString="?statusCode=50&limit=50"
+        isNavigating={isNavigating}
+      /> */}
+
       <DocBar
         title="Ремонт завершен"
         Icon={IconHandUp}
         queryString="?statusCode=50&limit=50"
+        isNavigating={isNavigating}
+      />
+
+      <DocBar
+        title="Цены согласованы"
+        Icon={Icon1}
+        queryString="?statusCode=60&limit=50"
+        isNavigating={isNavigating}
+      />
+
+      <DocBar
+        title="Работы согласованы"
+        Icon={Icon2}
+        queryString="?statusCode=70&limit=50"
         isNavigating={isNavigating}
       />
 
